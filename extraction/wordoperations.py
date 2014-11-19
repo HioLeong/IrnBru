@@ -1,4 +1,8 @@
 """Word Operations"""
+"""
+    Provides basic operations with texts such as tokenizing and splitting
+    articles to arbitrary lengths, filtering and removing characters
+"""
 
 import nltk
 
@@ -28,6 +32,5 @@ def splitParagraphs(text):
     paragraphSets = re.split('\n\n',text)
     return paragraphSets
 
-def filter(text):
+def filter_stops(text):
     return removeStopWords(removePunct(text))
-

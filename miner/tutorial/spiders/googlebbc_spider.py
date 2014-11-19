@@ -23,8 +23,8 @@ class BbcSpider(scrapy.Spider):
         f.write(response.body)
         f.close()
         hxs = Selector(response)
+            
         for data in hxs.xpath('//h3/a/@href').extract():
-        #for url in hxs.xpath('//h3[@class="r"]/a/@data-href').extract():
             url = self.getUrl(data)
             print url
             if (len(url) > 1):
@@ -33,6 +33,7 @@ class BbcSpider(scrapy.Spider):
     def parseArticle(self, response):
         hxs = Selector(response)
         item = Article()
+        item['date'] = hxs.xpath('//span[@class="date"]/text()').extract()
 
         item['title'] = hxs.xpath('//h1[@class="story-header"]/text()').extract()
         item['body'] = hxs.xpath('//div[@class="story-body"]/p/text()').extract()
