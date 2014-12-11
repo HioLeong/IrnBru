@@ -6,8 +6,9 @@ from tutorial.items import Article
 class BbcSpider(scrapy.Spider):
     name = "bbcgoog"
     allowed_domains = ["bbc.co.uk","google.com","google.co.uk"]
+        #"https://www.google.com/search?q=site%3Abbc.co.uk+scottish+independence+referendum&num=1000&tbs=cdr%3A1%2Ccd_min%3A%2Ccd_max%3A9%2F17%2F2014"
     start_urls = [
-        "https://www.google.com/search?q=site%3Abbc.co.uk+scottish+independence+referendum&num=1000&tbs=cdr%3A1%2Ccd_min%3A%2Ccd_max%3A9%2F17%2F2014"
+        "https://www.google.com/search?q=site%3Abbc.co.uk+scottish+independence+factors&num=1000&tbs=cdr%3A1%2Ccd_min%3A%2Ccd_max%3A9%2F17%2F2014"
     ]
     articleList = []
 

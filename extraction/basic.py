@@ -21,10 +21,6 @@ def getArticleFromDir(dir):
     file.close()
     return text
 
-def get_topic_of_article(article_body):
-    #TODO: Fill in the processing
-    return 
-
 def get_max_freq_word(freq, n=1):
     return
 
@@ -32,22 +28,17 @@ def get_max_freq_word(freq, n=1):
 def get_article_from_json(json_dir):
     json_data= open(json_dir)
     data = json.load(json_data)
-    for article in data:
+    for idx, article in enumerate(data):
         article_body = article['body']
-        for sent in article_body:
-            word_toks = getWordToks(sent)
-            word_toks = filter_stops(word_toks)
-            if len(word_toks) > 0:
-                print len(word_toks)
-                freq = get_freq_of_word_toks(word_toks)
-                print freq.items()
+        print idx 
+        print get_topic_of_article(article_body)
 
 def getNames(tags):
     names = [a for (a,b) in tags if b =='NNP']
     return names
 
 def main():
-    article = get_article_from_json('../res/bbc.json')
+    article = get_article_from_json('../res/bbcfactors.json')
 
     #word_toks = getWordToks(article)
     #word_toks = filter(word_toks)
