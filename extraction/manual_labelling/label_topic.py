@@ -16,29 +16,17 @@ def load_topics():
 def __init__():
     load_topics()
 
-def display_options():
+def display_options(title=""):
+    print title
     for i, topic in enumerate(__topics__):
         print str(i) + '. ' + topic['topic']
-    print 'x. if no topic'
 
-def print_array(texts):
-    for text in texts:
-        print text
-
-def get_topic(title,body,topic_articles=__db__.topic_articles):
-    print '************************************************'
-    print_array(title)
-    print_array(body)
-    display_options()
+def get_topic(title,body,topic_article=__db__):
+    display_options(title)
     try:
-        topic_index = int(raw_input())
-        if topic_index >= 0 | topic_index < 7:
-            topic = __topics__[int(topic_index)]['topic']
-        else:
-            topic = 'none'
-        topic_article = { 'topic': topic, 'title': title, 'body': body}
-        print topic_article
-        topic_articles.insert(topic_article)
+        topic_index = raw_input()
+        topic = __topics__[int(topic_index)]['topic']
+        __db__.article_topic.insert({"title":title, "topic":topic})
     except IndexError:
         print 'Index out of bound, try again'
 
@@ -48,7 +36,8 @@ def get_article(articles_dir):
     for art in data:
         title = art['title']
         body = art['body']
-        get_topic(art,body)
+        if not __db__.article_topic.find_one({"title":title}):
+            get_topic(title,body)
 
 def main():
     __init__()
