@@ -21,6 +21,9 @@ def display_options(title=""):
     for i, topic in enumerate(__topics__):
         print str(i) + '. ' + topic['topic']
 
+def __index_of_none__():
+    _topics.index("None")
+
 def get_topic(title,body,topic_article=__db__):
     display_options(title)
     try:

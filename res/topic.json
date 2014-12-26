@@ -26,5 +26,9 @@
   {
     "topic": "politics",
     "seeds": ["politic", "parliament","conservatives","tories","labour", "David Cameron"]
+  },
+  { 
+    "topic": "none",
+    "seeds": []
   }
 ]
