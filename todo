@@ -1,0 +1,16 @@
+Project
+    - Restructure into modules
+    - Label topics
+    - UI
+
+DB
+    - DB Manager implemented
+
+Topics
+    - Automate Freq Dist
+
+Miner
+    - Mine other types of articles
+
+Manual Labelling:
+    - Multiple Topics support
