@@ -1,7 +1,11 @@
 # Django settings for IrnBruMvc project.
+import os.path
+
+PROJECT_DIR = os.path.realpath('..')
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -12,7 +16,9 @@ MANAGERS = ADMINS
 DATABASES = {
         'default' : {
             'ENGINE' : 'django_mongodb_engine',
-            'NAME' : 'fyp_db'
+            'NAME' : 'fyp_db',
+            'HOST' : '127.0.0.1',
+            'PORT': 27017
             }
         }
 
@@ -103,6 +109,7 @@ ROOT_URLCONF = 'IrnBruMvc.urls'
 WSGI_APPLICATION = 'IrnBruMvc.wsgi.application'
 
 TEMPLATE_DIRS = (
+        PROJECT_DIR + '/topics_trainer/templates'
         # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
         # Always use forward slashes, even on Windows.
         # Don't forget to use absolute paths, not relative paths.

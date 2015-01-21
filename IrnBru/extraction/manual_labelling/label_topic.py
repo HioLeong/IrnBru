@@ -5,7 +5,7 @@ __project_dir__ = '../../res'
 
 __topics__ = []
 __client__ = MongoClient('127.0.0.1', 27017)
-__db__ = __client__.projectdb
+__db__ = __client__.fyp_db
 
 __finished__ = "Finished"
 
@@ -62,9 +62,19 @@ def get_article(articles_dir):
                     topics.append(input_topic)
             __insert_topic_article_into_db__(__get_topic_article_json__(title,topics))
 
+def save_articles(articles_dir):
+    json_file = open(articles_dir)
+    data = json.load(json_file)
+    for art in data:
+        title = art['title']
+        body = art['body']
+        __db__.topics_trainer_article.insert({"title":title, "body":body})
+
+
 def main():
     __init__()
-    get_article(__project_dir__ + '/bbcfactors.json')
+    #get_article(__project_dir__ + '/bbcfactors.json')
+    save_articles(__project_dir__ + '/bbcfactors.json')
     return
 
 if __name__ == '__main__':
