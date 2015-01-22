@@ -1,8 +1,0 @@
-{% load staticfiles %}
-
-{% if article %}
-    {{ article.title }}
-{% else %}
-    Invalid Article
-{% endif %}
-

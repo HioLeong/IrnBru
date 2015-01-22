@@ -1,8 +1,15 @@
+{% extends "base.html" %}
 {% load staticfiles %}
 
+{% block title %}
 {% if article %}
-    {{ article.title }}
+    <h1> {{ article.title }} </h1>
 {% else %}
     Invalid Article
 {% endif %}
+{% endblock %}
+
+{% block content %}
+{{ article.body}}
+{% endblock %}
 

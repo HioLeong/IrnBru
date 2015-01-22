@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+
+    <body>
+        <div id="sidebar">
+        {% block title %}My amazing site{% endblock %}
+            {% block sidebar %}
+            {% endblock %}
+        </div>
+
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>
