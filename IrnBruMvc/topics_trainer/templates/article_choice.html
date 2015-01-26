@@ -22,11 +22,15 @@ Invalid Article
     <div class="checkbox">
         {% for topic in topics %}
         <label class="topic_label">
+            {% if topic.id in chosen_topics %}
+            <input type="checkbox" name="topics" id="topics"  value="{{ topic.id }}" checked/> 
+            {% else %}
             <input type="checkbox" name="topics" id="topics"  value="{{ topic.id }}"/> 
+            {% endif %}
             {{ topic.topic }} 
         </label>
         {% endfor %}
     </div>
-    <input type="submit" value="update_topic"/>
+    <input type="submit" value="Update"/>
 </form>
 {% endblock %}

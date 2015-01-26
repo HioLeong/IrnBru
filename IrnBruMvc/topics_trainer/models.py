@@ -11,4 +11,4 @@ class Article(models.Model):
 
 class Choice(models.Model):
     choice = models.ForeignKey(Article)
-    topic = EmbeddedModelField(Topic)
+    topic = ListField(models.CharField(max_length=200))
