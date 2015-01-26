@@ -6,14 +6,6 @@ admin.autodiscover()
 
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'IrnBruMvc.views.home', name='home'),
-    # url(r'^IrnBruMvc/', include('IrnBruMvc.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    url(r'topic_trainer/', include('topics_trainer.urls')),
+    url(r'^topics_trainer/', include('topics_trainer.urls', namespace="topics_trainer")),
     url(r'^admin/', include(admin.site.urls)),
 )

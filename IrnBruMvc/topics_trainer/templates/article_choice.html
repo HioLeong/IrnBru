@@ -3,13 +3,30 @@
 
 {% block title %}
 {% if article %}
-    <h1> {{ article.title }} </h1>
+<h1> {{ article.title.0 }} </h1>
 {% else %}
-    Invalid Article
+Invalid Article
 {% endif %}
 {% endblock %}
 
 {% block content %}
-{{ article.body}}
+{% for sent in article.body%}
+<p> {{ sent }} </p>
+{% endfor %}
 {% endblock %}
 
+{% block topics %}
+<h3> Topics </h3>
+<form action="{% url 'topics_trainer:update_topic' article.id %}" method="POST">
+    {% csrf_token %}
+    <div class="checkbox">
+        {% for topic in topics %}
+        <label class="topic_label">
+            <input type="checkbox" name="topics" id="topics"  value="{{ topic.id }}"/> 
+            {{ topic.topic }} 
+        </label>
+        {% endfor %}
+    </div>
+    <input type="submit" value="update_topic"/>
+</form>
+{% endblock %}

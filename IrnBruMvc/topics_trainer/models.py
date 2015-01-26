@@ -1,6 +1,7 @@
 from django.db import models
+from djangotoolbox.fields import ListField, EmbeddedModelField
 
-from djangotoolbox.fields import ListField
+from topics_editor.models import Topic
 
 class Article(models.Model):
     title = models.CharField(max_length=200)
@@ -10,5 +11,4 @@ class Article(models.Model):
 
 class Choice(models.Model):
     choice = models.ForeignKey(Article)
-    topic = ListField()
-
+    topic = EmbeddedModelField(Topic)
