@@ -1,10 +1,10 @@
 import scrapy
 from scrapy.selector import Selector
 from scrapy.http import Request
-from tutorial.items import Article
+from article_extractor.items import Article
 
 class BbcSpider(scrapy.Spider):
-    name = "bbcgoog"
+    name = "bbc"
     allowed_domains = ["bbc.co.uk","google.com","google.co.uk"]
     start_urls = [
         "https://www.google.com/search?q=site%3Abbc.co.uk+scottish+independence+factors&num=1000&tbs=cdr%3A1%2Ccd_min%3A%2Ccd_max%3A9%2F17%2F2014"
@@ -18,12 +18,11 @@ class BbcSpider(scrapy.Spider):
             return ''
 
     def parse(self, response):
-        
         f = open('test.html', 'w')
         f.write(response.body)
         f.close()
         hxs = Selector(response)
-            
+
         for data in hxs.xpath('//h3/a/@href').extract():
             url = self.getUrl(data)
             print url

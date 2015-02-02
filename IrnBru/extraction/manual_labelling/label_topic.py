@@ -65,16 +65,16 @@ def get_article(articles_dir):
 def save_articles(articles_dir):
     json_file = open(articles_dir)
     data = json.load(json_file)
-    for art in data:
-        title = art['title']
-        body = art['body']
-        __db__.topics_trainer_article.insert({"title":title, "body":body})
+    for t in data:
+        topic = t['topic']
+        seeds = t['seeds']
+        __db__.topics_editor_topic.insert({"topic": topic, "seeds":seeds})
 
 
 def main():
     __init__()
     #get_article(__project_dir__ + '/bbcfactors.json')
-    save_articles(__project_dir__ + '/bbcfactors.json')
+    save_articles(__project_dir__ + '/topic.json')
     return
 
 if __name__ == '__main__':

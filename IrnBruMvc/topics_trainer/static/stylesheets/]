@@ -39,14 +39,15 @@ document.onkeydown = function(event) {
     case 37:
         // Key left.
         console.log('Previous page');
-        $('form').submit();
+        trainer.updateTopics();
         trainer.prevPage();
         break;
     case 38:
         break;
     case 39:
+        // Key right.
+    trainer.updateTopics();
         console.log('Next page');
-        $('form').submit();
         trainer.nextPage();
         break;
     case 40:
