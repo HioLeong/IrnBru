@@ -3,14 +3,15 @@ from scrapy.selector import Selector
 from scrapy.http import Request
 from article_extractor.items import Article
 
-class BbcSpider(scrapy.Spider):
-    name = "bbc"
-    allowed_domains = ["bbc.co.uk","google.com","google.co.uk"]
-    start_urls = [
-        "https://www.google.com/search?q=site%3Abbc.co.uk+scottish+independence+factors&num=1000&tbs=cdr%3A1%2Ccd_min%3A%2Ccd_max%3A9%2F17%2F2014",
-        "https://www.google.com/search?q=site%3Abbc.co.uk+scottish+devolution&num=1000&tbs=cdr%3A1%2Ccd_min%3A%2Ccd_max%3A9%2F17%2F2014"
-    ]
-    articleList = []
+class ArticleSpider(scrapy.Spider):
+    name = ""
+    allowed_domains = []
+    start_urls = []
+    xpaths = { 'date': '//span[@class="date"]/text()', 
+            'title': '//h1[@class="content__headline js-score"]/text()', 
+            'body': '//div[@class="content__article-body from-content-api js-article__body"]/p/text()' 
+            }
+
 
     def getUrl(self, url):
         if url[0:2] == '/u':
@@ -26,17 +27,16 @@ class BbcSpider(scrapy.Spider):
 
         for data in hxs.xpath('//h3/a/@href').extract():
             url = self.getUrl(data)
-            print url
             if (len(url) > 1):
                 yield Request(url, callback = self.parseArticle)
 
     def parseArticle(self, response):
         hxs = Selector(response)
         item = Article()
-        item['date'] = hxs.xpath('//span[@class="date"]/text()').extract()
+        item['date'] = hxs.xpath(xpaths['date']).extract()
 
-        item['title'] = hxs.xpath('//h1[@class="story-header"]/text()').extract()
-        item['body'] = hxs.xpath('//div[@class="story-body"]/p/text()').extract()
+        item['title'] = hxs.xpath(xpaths['title']).extract()
+        item['body'] = hxs.xpath(xpaths['body']).extract()
 
         if len(item['body']) > 0:
             yield item

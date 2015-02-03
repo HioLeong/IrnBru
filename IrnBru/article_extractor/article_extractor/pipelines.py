@@ -3,7 +3,7 @@ from pymongo import MongoClient
 import json
 
 client = MongoClient('127.0.0.1', 27017)
-db = client.fpy_db
+db = client.fyp_db
 collection = db.topics_trainer_article
 
 class ArticleExtractorPipeline(object):
