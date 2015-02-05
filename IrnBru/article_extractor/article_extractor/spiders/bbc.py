@@ -1,4 +1,5 @@
 import scrapy
+import article_extractor
 from scrapy.selector import Selector
 from scrapy.http import Request
 from article_extractor.items import Article
