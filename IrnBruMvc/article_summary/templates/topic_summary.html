@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}
+Summary
+{% endblock %}
+
+{% block content %}
+<ul>
+    {% for c in content %}
+    <li> <h4> {{ c.topic }} </h4> {{ c.freqdist }} </li>
+    {% endfor %}
+</ul>
+{% endblock %}

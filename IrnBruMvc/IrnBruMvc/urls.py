@@ -7,5 +7,6 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^topics_trainer/', include('topics_trainer.urls', namespace="topics_trainer")),
+    url(r'^article_summary/', include('article_summary.urls', namespace="article_summary")),
     url(r'^admin/', include(admin.site.urls)),
 )

@@ -24,7 +24,7 @@ def article_choice(request, article_index):
     except ObjectDoesNotExist:
         context = RequestContext(request, {
             'article': article,
-        'topics': topics,
+            'topics': topics,
         })
 
     return HttpResponse(template.render(context))

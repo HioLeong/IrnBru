@@ -48,8 +48,7 @@ class TopicsTrainerTest(TestCase):
         self.setUp()
         self.setUpChoices()
         bodies = get_articles_bodies_from_choices(Choice.objects.all())
-        fd = FreqDist(get_tokens_of_topic(bodies))
-        print fd.most_common()
+        #TODO: Finish
 
     def test_get_article_bodies_from_choices(self):
         self.setUp()

@@ -1,5 +1,3 @@
-import itertools
-
 from nltk import FreqDist
 from nltk.tokenize import *
 from nltk.corpus import stopwords
@@ -18,13 +16,15 @@ def get_articles_bodies_from_choices(choices):
     bodies = [ a.body for a in Article.objects.filter(id__in=article_ids)]
     return aggregate_list_of_lists(bodies)
 
-def aggregate_list_of_lists(lists):
-    return [item for sublist in lists for item in sublist]
-
 def get_tokens_of_topic(bodies):
-    toks = [word_tokenize(b) for b in bodies]
+    toks = aggregate_list_of_lists([word_tokenize(b) for b in bodies])
+    toks = [t.lower() for t in toks]
+
     filtered_toks = [t for t in toks if not t in get_stopwords()]
-    return aggregate_list_of_lists(filtered_toks)
+    return filtered_toks
+
+def get_freqdist_of_toks(toks):
+    return FreqDist(toks)
 
 def get_stopwords():
     corpus_stopword = stopwords.words('english')
@@ -32,5 +32,7 @@ def get_stopwords():
     global_stopword = []
     for line in f:
         global_stopword.append(line[:-1])
-
     return corpus_stopword + global_stopword
+
+def aggregate_list_of_lists(lists):
+    return [item for sublist in lists for item in sublist]
