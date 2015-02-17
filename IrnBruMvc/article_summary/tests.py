@@ -3,6 +3,7 @@ from django.test import TestCase
 from article_summary.word_op import *
 from topics_editor.models import Topic
 from topics_trainer.models import Article, Choice
+from topics_editor.models import WordFrequency
 
 class TopicsTrainerTest(TestCase):
 
@@ -58,3 +59,11 @@ class TopicsTrainerTest(TestCase):
         expected = ["body one","body two","body three","body four"]
         actual = get_articles_bodies_from_choices(choices)
         self.assertEqual(expected, actual)
+
+    def test_get_wordfrequency_model_from_tuples(self):
+        test_tuples = [('hello', 10), ('goodbye', 1)]
+        actual = get_wordfrequency_model_from_tuples(test_tuples)
+        expected = [WordFrequency(word='hello', frequency=10), 
+                WordFrequency(word='goodbye', frequency=1)]
+        self.assertEqual(expected, actual)
+

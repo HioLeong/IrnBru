@@ -3,7 +3,7 @@ from nltk.tokenize import *
 from nltk.corpus import stopwords
 
 from topics_trainer.models import Article, Choice
-from topics_editor.models import Topic
+from topics_editor.models import Topic, WordFrequency
 
 def get_topic_from_id(topic_id):
     return Topic.objects.get(id=topic_id).topic
@@ -33,6 +33,24 @@ def get_stopwords():
     for line in f:
         global_stopword.append(line[:-1])
     return corpus_stopword + global_stopword
+
+''' Updates the most common words in the articles so far '''
+def update_topics_common_words(numberOfWords):
+    topics = Topic.objects.all()
+    for topic in topics:
+        choices = get_choices_of_topic(topic.id)
+        article_bodies = get_articles_bodies_from_choices(choices)
+        bodies_toks = get_tokens_of_topic(article_bodies)
+        most_common = get_freqdist_of_toks(bodies_toks).most_common(numberOfWords)
+        most_common_wordfrequency = get_wordfrequency_model_from_tuples(most_common)
+        topic.common_words = most_common_wordfrequency
+        topic.save()
+
+def get_wordfrequency_model_from_tuples(tuples):
+    wordfrequency_list= []
+    for t in tuples:
+        wordfrequency_list.append(WordFrequency(word=t[0], frequency=t[1]))
+    return wordfrequency_list
 
 def aggregate_list_of_lists(lists):
     return [item for sublist in lists for item in sublist]

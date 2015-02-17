@@ -19,9 +19,11 @@ def topics_summary(request):
         article_bodies = get_articles_bodies_from_choices(choices)
         bodies_toks = get_tokens_of_topic(article_bodies)
         freq_dist = get_freqdist_of_toks(bodies_toks).most_common(50)
-
         content.append({'topic': topic_name, 'freqdist': freq_dist})
 
+    update_topics_common_words(50)
+
+    # Currently just displays the list out
     context = RequestContext(request, {
         'content': content
         })
