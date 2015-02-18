@@ -5,23 +5,33 @@ from topics_trainer.models import Article, Choice
 from factors_trainer.factors import *
 
 class SimpleTest(TestCase):
-    def set_up(self):
+    def setUp(self):
         topic_object = Topic.objects.create(topic='energy', 
                 common_words=[WordFrequency(word='hello', frequency=10),
                     WordFrequency(word='world', frequency=5)])
-        Article.objects.create(title='Hello goodbye', body='hello there. how are you world? how about a hello world?')
-        #Choice.objects.create(choice=topic_object, topic = ['energy'])
+        article_object = Article.objects.create(title='Hello goodbye', body=['there. how are you world?', 'how about a hello world?'])
+        Choice.objects.create(choice=article_object, topic = ['energy'])
+
+    def tearDown(self):
+        Topic.objects.all().delete()
+        Article.objects.all().delete()
+        Choice.objects.all().delete()
 
     def test_sent_contains_topic_common_words(self):
-        self.set_up()
-        test_sentence = "hello world"
+        if Topic.objects.count() == 0:
+            self.setUp()
+        test_sentence = "how are you world?"
         expected = True
         actual = sent_contains_topic_common_words(test_sentence, 'energy')
         self.assertEqual(expected, actual)
+        expected = False
+        false_sentence = "nothingness"
+        actual = sent_contains_topic_common_words(false_sentence, 'energy')
+        self.assertEqual(expected, actual)
 
-    def get_factor_sentence_for_topic(self):
+    def test_get_factor_sentence_for_topic(self):
         topic = Topic.objects.get(topic='energy')
-        expected = ['hello there.', 'how are you world?', 'how about a hello world?']
+        expected = ['how are you world?', 'how about a hello world?']
         actual = get_factor_sentence_for_topic(topic)
         self.assertEqual(expected, actual)
 
@@ -30,3 +40,11 @@ class SimpleTest(TestCase):
         expected = ['sentence one.', 'sentence two.', 'sentence three.']
         actual = get_sentences_from_article(article)
         self.assertEqual(expected, actual)
+
+    def test_get_articles_from_choices(self):
+        if Topic.objects.count() == 0:
+            self.setUp()
+        choices = Choice.objects.all()
+        expected = Article.objects.all()
+        actual = get_articles_from_choices(choices)
+        self.assertEqual(expected[0], actual[0])

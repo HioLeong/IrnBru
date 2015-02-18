@@ -49,7 +49,6 @@ class TopicsTrainerTest(TestCase):
         self.setUp()
         self.setUpChoices()
         bodies = get_articles_bodies_from_choices(Choice.objects.all())
-        #TODO: Finish
 
     def test_get_article_bodies_from_choices(self):
         self.setUp()
