@@ -9,3 +9,7 @@ def sent_contains_topic_common_words(sent, topic_name):
             return True
         else:
             return False
+
+def get_factor_sentence_for_topic(topic):
+    return
+
