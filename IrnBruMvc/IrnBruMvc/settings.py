@@ -128,6 +128,7 @@ INSTALLED_APPS = (
         #'django.contrib.admindocs',
         'topics_trainer',
         'article_summary',
+        'factors_trainer',
         'django_mongodb_engine'
         )
 
