@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+<h1>Factors Training</h1>
+{% endblock %}
+
+{% block content %}
+<div class='text-center'>
+    <h1> {{ sentence }} </h1>
+</div>
+<div class='btn-group btn-group-justified' role='group'>
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default">Independence </button>
+    </div>
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default">Better Together</button>
+    </div>
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default">No Comments</button>
+    </div>
+</div>
+{% endblock %}
+

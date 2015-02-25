@@ -48,3 +48,12 @@ class SimpleTest(TestCase):
         expected = Article.objects.all()
         actual = get_articles_from_choices(choices)
         self.assertEqual(expected[0], actual[0])
+
+    def test_update_factors(self):
+        if Topic.objects.count() == 0:
+            self.setUp()
+        update_factors()
+        topic = Topic.objects.all()[0]
+        expected = [Factor(topic=topic,factor='how are you world?',sentiment=''), 
+                Factor(topic=topic, factor='how about a hello world?', sentiment='')]
+        actual = Factor.objects.all()

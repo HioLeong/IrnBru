@@ -2,6 +2,7 @@ from string import punctuation
 from nltk.tokenize import sent_tokenize, word_tokenize
 
 from topics_editor.models import Topic
+from factors_trainer.models import Factor
 from article_summary.word_op import *
 
 #TODO: Refactor topic_name, to common words
@@ -32,3 +33,14 @@ def get_factor_sentence_for_topic(topic):
     sentences = aggregate_list_of_lists([get_sentences_from_article(a) for a in articles])
     factor_sentences = [a for a in sentences if sent_contains_topic_common_words(a, topic.topic)]
     return factor_sentences
+
+def update_factors():
+    topics = Topic.objects.all()
+    for t in topics:
+        print t.topic
+        factor_sentences = get_factor_sentence_for_topic(t)
+        for sent in factor_sentences:
+            Factor.objects.create(topic=t,factor=sent,sentiment='')
+
+def get_next_factor():
+    return Factor.objects.filter(sentiment='')[0]

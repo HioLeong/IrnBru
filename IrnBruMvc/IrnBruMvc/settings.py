@@ -6,7 +6,6 @@ PROJECT_DIR = os.path.realpath('..')
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-
 ADMINS = (
         # ('Your Name', 'your_email@example.com'),
         )
@@ -127,6 +126,7 @@ INSTALLED_APPS = (
         # Uncomment the next line to enable admin documentation:
         #'django.contrib.admindocs',
         'topics_trainer',
+        'topics_editor',
         'article_summary',
         'factors_trainer',
         'django_mongodb_engine'
