@@ -6,10 +6,20 @@
 
 {% block content %}
 <h3> Count: {{ factors.count }} </h3>
-<ul>
-{% for factor in factors %}
-<li> {{ factor.factor  }} </li>
-{% endfor %}
-</ul>
+<div id='factors' class='container'>
+    {% for factor in factors %}
+    <div class='row'>
+        <div class='col-md-9'>{{ factor.factor }}</div>
+        <div class='col-md-3'>
+            <div class='btn-group btn-group-sm' role='group'>
+                <button type='button' class='btn btn-default'> Yes </button>
+                <button type='button' class='btn btn-default'> No </button>
+                <button type='button' class='btn btn-default'> Neutral </button>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    {% endfor %}
+</div>
 {% endblock %}
 
