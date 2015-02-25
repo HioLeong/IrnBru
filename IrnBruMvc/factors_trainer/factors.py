@@ -43,3 +43,6 @@ def update_factors():
 
 def get_next_factor():
     return Factor.objects.filter(sentiment='')[0]
+
+def get_factors_for_topic(topic):
+    return Factor.objects.filter(topic_id=topic.id)

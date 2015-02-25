@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+<h1>Factors Training</h1>
+{% endblock %}
+
+{% block content %}
+<h3> Count: {{ factors.count }} </h3>
+<ul>
+{% for factor in factors %}
+<li> {{ factor.factor  }} </li>
+{% endfor %}
+</ul>
+{% endblock %}
+
