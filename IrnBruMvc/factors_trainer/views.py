@@ -11,7 +11,8 @@ def get_factors(request, topic_name):
     topic = Topic.objects.get(topic = topic_name)
     factors = get_factors_for_topic(topic)
     context = RequestContext(request, {
-        'factors': factors
+        'factors': factors,
+        'topic_name': topic_name.title()
         })
     return HttpResponse(template.render(context))
 
@@ -26,5 +27,4 @@ def index(request):
         })
 
     update_factors()
-
     return HttpResponse(template.render(context))
