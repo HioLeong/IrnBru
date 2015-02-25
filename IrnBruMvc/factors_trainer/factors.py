@@ -28,7 +28,7 @@ def get_articles_from_choices(choices):
     return Article.objects.filter(id__in=article_id)
 
 def get_factor_sentence_for_topic(topic):
-    choices = get_choices_of_topic(topic.topic)
+    choices = get_choices_of_topic(topic.id)
     articles = get_articles_from_choices(choices)
     sentences = aggregate_list_of_lists([get_sentences_from_article(a) for a in articles])
     factor_sentences = [a for a in sentences if sent_contains_topic_common_words(a, topic.topic)]
@@ -37,7 +37,6 @@ def get_factor_sentence_for_topic(topic):
 def update_factors():
     topics = Topic.objects.all()
     for t in topics:
-        print t.topic
         factor_sentences = get_factor_sentence_for_topic(t)
         for sent in factor_sentences:
             Factor.objects.create(topic=t,factor=sent,sentiment='')
