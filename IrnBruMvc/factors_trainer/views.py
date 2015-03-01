@@ -28,3 +28,10 @@ def index(request):
 
     update_factors()
     return HttpResponse(template.render(context))
+
+def update_factor(request, factor_id):
+    factor = Factor.objects.get(id=factor_id)
+    if request.POST:
+        print request.POST['sentiment']
+        return HttpResponse(request.POST['sentiment'])
+    return HttpResponse('Not updated')

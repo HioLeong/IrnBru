@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_factors_trainer.html" %}
 
 {% block title %}
 <h1>{{ topic_name }} Factors Listing</h1>
@@ -11,11 +11,20 @@
     <div class='row'>
         <div class='col-md-9'>{{ factor.factor }}</div>
         <div class='col-md-3'>
-            <div class='btn-group btn-group-sm' role='group'>
-                <button type='button' class='btn btn-default'> Yes </button>
-                <button type='button' class='btn btn-default'> No </button>
-                <button type='button' class='btn btn-default'> Neutral </button>
-            </div>
+            <form action="{% url 'factors_trainer:update_factor' factor.id %}" method="POST">
+                {% csrf_token %}
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-primary">
+                        <input type="checkbox" name="sentiment" value='Yes' autocomplete="off"/> Yes
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="checkbox" name="sentiment1" value='No' autocomplete="off"/> No
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="checkbox" name="sentiment2" value='Neutral' autocomplete="off"/> Neutral
+                    </label>
+                </div>
+            </form>
         </div>
     </div>
     <hr/>
