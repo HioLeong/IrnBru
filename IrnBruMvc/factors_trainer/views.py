@@ -32,6 +32,12 @@ def index(request):
 def update_factor(request, factor_id):
     factor = Factor.objects.get(id=factor_id)
     if request.POST:
-        print request.POST['sentiment']
-        return HttpResponse(request.POST['sentiment'])
-    return HttpResponse('Not updated')
+        try:
+            sentiment = request.POST['sentiment']
+        except KeyError:
+            sentiment = ''
+        factor.sentiment = sentiment
+        factor.save()
+        return HttpResponse(sentiment)
+    else:
+        return HttpResponse('Not updated')

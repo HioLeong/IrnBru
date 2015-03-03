@@ -45,4 +45,3 @@ def update_topic(request, article_id):
     else:
         return HttpResponse("Get")
 
-

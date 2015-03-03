@@ -24,13 +24,17 @@ $(document).ready(function(){
                     type: 'POST',
                     data: postData,
                     success: function(data, textStatus, jqHr) {
+                        $(form).closest('div[class=row]').hide();
+                        return true;
                     },
                     error: function(jqHr, textStatus, errorThrown) {
+                        return false;
                     }
                 }
             );
         });
         $(form).submit();
+        $(form).unbind('submit');
     });
 });
 

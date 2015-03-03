@@ -29,10 +29,10 @@ class SimpleTest(TestCase):
         actual = sent_contains_topic_common_words(false_sentence, 'energy')
         self.assertEqual(expected, actual)
 
-    def test_get_factor_sentence_for_topic(self):
+    def test_get_factor_sentences_for_topic(self):
         topic = Topic.objects.get(topic='energy')
         expected = ['how are you world?', 'how about a hello world?']
-        actual = get_factor_sentence_for_topic(topic)
+        actual = get_factor_sentences_for_topic(topic)
         self.assertEqual(expected, actual)
 
     def test_get_sentences_from_article(self):
