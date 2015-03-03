@@ -34,7 +34,6 @@ def get_factor_sentences_for_topic(topic):
     for article in articles:
         for sentence in get_sentences_from_article(article):
             sentence_article_tuple.append((sentence,article))
-    #sentences = aggregate_list_of_lists([get_sentences_from_article(a[0]) for a in articles])
     factor_sentences = [s for s in sentence_article_tuple if sent_contains_topic_common_words(s[0], topic.topic)]
     return factor_sentences
 
@@ -54,3 +53,7 @@ def get_next_factor():
 
 def get_factors_for_topic(topic):
     return Factor.objects.filter(topic_id=topic.id)
+
+def get_factors_with_sentiment(sentiment):
+    return Factor.objects.filter(sentiment=sentiment)
+

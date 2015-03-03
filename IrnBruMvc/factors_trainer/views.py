@@ -17,12 +17,16 @@ def get_factors(request, topic_name):
         })
     return HttpResponse(template.render(context))
 
-def report(request):
+def report_sentiment(request, sentiment):
     template = loader.get_template('report.html')
+    factors = get_factors_with_sentiment(sentiment)
     context = RequestContext(request, {
-        'content': 'content'
+        'factors': factors
         })
     return HttpResponse(template.render(context))
+
+def report(request):
+    return HttpResponse('response')
 
 def update(request):
     update_factors()
