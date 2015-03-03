@@ -9,7 +9,7 @@ from topics_editor.models import Topic
 def get_factors(request, topic_name):
     template = loader.get_template('factors_list.html')
     topic = Topic.objects.get(topic = topic_name)
-    factors = get_factors_for_topic(topic)
+    factors = [factor for factor in get_factors_for_topic(topic) if factor.sentiment != '']
     context = RequestContext(request, {
         'factors': factors,
         'topic_name': topic_name.title()

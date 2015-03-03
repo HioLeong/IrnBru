@@ -8,7 +8,7 @@ var trainer = {
             return false;
         });
     }
-    };
+};
 
 $(document).ready(function(){
     $('input[type=checkbox]').on('change',function(event) {
@@ -25,6 +25,7 @@ $(document).ready(function(){
                     data: postData,
                     success: function(data, textStatus, jqHr) {
                         $(form).closest('div[class=row]').hide();
+                        console.log(data);
                         return true;
                     },
                     error: function(jqHr, textStatus, errorThrown) {
