@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+Article List
+{% endblock %}
+
+{% block content %}
+{% for article in articles %}
+<div class='list-group'>
+    <a href='{{ forloop.counter }}' class='list-group-item'>{{ article.title.0 }}</a>
+</div>
+{% endfor %}
+{% endblock %}

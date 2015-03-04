@@ -6,7 +6,12 @@ from topics_trainer.models import Article, Choice
 from topics_editor.models import Topic
 
 def index(request):
-    return HttpResponse('/topics_trainer/index for articles')
+    template = loader.get_template('articles_list.html')
+    articles = Article.objects.all()
+    context = RequestContext(request, {
+        'articles': articles
+        })
+    return HttpResponse(template.render(context))
 
 def article_choice(request, article_index):
     article = Article.objects.all()[int(article_index)]
