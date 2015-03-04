@@ -1,9 +1,13 @@
 {% extends "base_factors_trainer.html" %}
 
 {% block title %}
-Report
+Report: {{ sentiment.title }}
 {% endblock %}
 
 {% block content %}
-
+{% for factor in factors %}
+<div class='row'>
+    {{ factor.factor }}
+</div>
+{% endfor %}
 {% endblock %}
