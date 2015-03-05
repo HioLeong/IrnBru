@@ -11,6 +11,10 @@ def get_topic_from_id(topic_id):
 def get_choices_of_topic(topic_id):
     return Choice.objects.filter(topic__contains=topic_id)
 
+def get_article_from_choice(choice):
+    article_id = choice.choice_id
+    return Article.objects.get(id=article_id)
+
 def get_articles_bodies_from_choices(choices):
     article_ids = [c.choice_id for c in choices]
     bodies = [ a.body for a in Article.objects.filter(id__in=article_ids)]
