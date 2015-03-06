@@ -1,4 +1,5 @@
 from string import punctuation
+import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize
 
 from topics_editor.models import Topic
@@ -57,3 +58,6 @@ def get_factors_for_topic(topic):
 def get_factors_with_sentiment(sentiment):
     return Factor.objects.filter(sentiment=sentiment)
 
+def get_pos_tag_of_sentence(sentence):
+    sentence_toks = word_tokenize(sentence)
+    return [tag[1] for tag in nltk.pos_tag(sentence_toks)]

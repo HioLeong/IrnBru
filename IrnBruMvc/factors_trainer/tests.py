@@ -57,3 +57,9 @@ class SimpleTest(TestCase):
         expected = [Factor(topic=topic,factor='how are you world?',sentiment=''), 
                 Factor(topic=topic, factor='how about a hello world?', sentiment='')]
         actual = Factor.objects.all()
+
+    def test_get_pos_tag_of_sentence(self):
+        sentence = 'all work no play makes michael a dull boy'
+        expected = ['DT', 'NN', 'DT', 'NN', 'VBZ', 'NN', 'DT', 'NN', 'NN']
+        actual = get_pos_tag_of_sentence(sentence)
+        self.assertEqual(expected, actual)
