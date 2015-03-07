@@ -61,3 +61,9 @@ def get_factors_with_sentiment(sentiment):
 def get_pos_tag_of_sentence(sentence):
     sentence_toks = word_tokenize(sentence)
     return [tag[1] for tag in nltk.pos_tag(sentence_toks)]
+
+def aggregate_pos_tags(pos_tags):
+    aggregate = ''
+    for tag in pos_tags:
+        aggregate += '<' + tag + '>'
+    return aggregate

@@ -63,3 +63,10 @@ class SimpleTest(TestCase):
         expected = ['DT', 'NN', 'DT', 'NN', 'VBZ', 'NN', 'DT', 'NN', 'NN']
         actual = get_pos_tag_of_sentence(sentence)
         self.assertEqual(expected, actual)
+
+
+    def test_aggregate_pos_tags(self):
+        pos_tags = ['DT', 'NN', 'DT', 'NN', 'VBZ', 'NN', 'DT', 'NN', 'NN']
+        expected ='<DT><NN><DT><NN><VBZ><NN><DT><NN><NN>'
+        actual = aggregate_pos_tags(pos_tags)
+        self.assertEqual(expected, actual)
