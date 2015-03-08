@@ -26,11 +26,13 @@ def get_factors(request, topic_name):
         })
     return HttpResponse(template.render(context))
 
-def report_sentiment(request, sentiment):
+def report_sentiment(request, topic_name, sentiment):
+    topic = Topic.objects.get(topic=topic_name)
     template = loader.get_template('report.html')
     factors = get_factors_with_sentiment(sentiment)
+    topic_factors = [factor for factor in factors if factor.topic == topic]
     context = RequestContext(request, {
-        'factors': factors,
+        'factors': topic_factors,
         'sentiment': sentiment
         })
     return HttpResponse(template.render(context))

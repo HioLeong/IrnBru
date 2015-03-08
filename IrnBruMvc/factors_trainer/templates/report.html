@@ -7,7 +7,9 @@ Report: {{ sentiment.title }}
 {% block content %}
 {% for factor in factors %}
 <div class='row'>
-    {{ factor.factor }}
+    <div class='col-md-9'> {{ factor.factor }}
+        <hr/> 
+    </div>
 </div>
 {% endfor %}
 {% endblock %}
