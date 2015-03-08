@@ -26,7 +26,7 @@ def get_factors(request, topic_name):
         })
     return HttpResponse(template.render(context))
 
-def report_sentiment(request, topic_name, sentiment):
+def report_topic_factor_sentiments(request, topic_name, sentiment):
     topic = Topic.objects.get(topic=topic_name)
     template = loader.get_template('report.html')
     factors = get_factors_with_sentiment(sentiment)
@@ -37,8 +37,22 @@ def report_sentiment(request, topic_name, sentiment):
         })
     return HttpResponse(template.render(context))
 
+def report_sentiments(request, topic):
+    template = loader.get_template('sentiments_list.html')
+    sentiments = ['Yes', 'No', 'Neutral']
+    context = RequestContext(request, {
+        'topic': topic,
+        'sentiments': sentiments
+        })
+    return HttpResponse(template.render(context))
+
 def report(request):
-    return HttpResponse('response')
+    template = loader.get_template('report_topics_list.html')
+    topics = Topic.objects.all()
+    context = RequestContext(request, {
+        'topics': topics
+        })
+    return HttpResponse(template.render(context))
 
 def update(request):
     update_factors()

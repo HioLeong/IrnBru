@@ -1,0 +1,16 @@
+{% extends "base_factors_trainer.html" %}
+
+{% block title %}
+Factors Report - Topics Selection
+{% endblock %}
+
+{% block content %}
+<div id='topics_factors' class='container'>
+    {% for topic in topics %}
+    <div class='list-group'>
+        <a href='{{ topic.topic }}' class='list-group-item'>{{ forloop.counter}}. {{ topic.topic }}</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
