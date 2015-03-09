@@ -70,3 +70,9 @@ class SimpleTest(TestCase):
         expected ='<DT><NN><DT><NN><VBZ><NN><DT><NN><NN>'
         actual = aggregate_pos_tags(pos_tags)
         self.assertEqual(expected, actual)
+
+    def test_get_factor_word_list(self):
+        word_list = ['hello', 'hello', 'world', 'foo','foo', 'bar']
+        expected = ['hello', 'world', 'foo', 'bar']
+        actual = get_factor_word_list(word_list)
+        self.assertEqual(expected, actual)

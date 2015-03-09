@@ -1,6 +1,7 @@
 from string import punctuation
 import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize
+from nltk.corpus import stopwords
 
 from topics_editor.models import Topic
 from factors_trainer.models import Factor
@@ -67,3 +68,13 @@ def aggregate_pos_tags(pos_tags):
     for tag in pos_tags:
         aggregate += '<' + tag + '>'
     return aggregate
+
+def get_factor_word_list(factor):
+    word_toks = word_tokenize(factor.factor)
+    stop_words = stopwords.words('english')
+    filtered_toks = [t for t in toks if not t in stop_words]
+    word_list = []
+    for tok in filtered_toks:
+        if tok not in word_list:
+            word_list.append(tok)
+    return word_list
