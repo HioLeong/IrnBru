@@ -26,8 +26,11 @@ class FactorsClassifier():
         return train_set
 
     def factor_features(self, factor):
+        word_freq = get_factor_word_list(factor)
+        word_freq_feat = FeatStruct(word_freq)
         pos_pattern = self.__get_pos_pattern_from_factor__(factor)
-        return { 'pos_pattern': pos_pattern }
+        feature = FeatStruct(pattern=pos_pattern, words=word_freq)
+        return feature
 
     def train_factor_classifier(self, train_set):
         classifier = NaiveBayesClassifier(train_set)
