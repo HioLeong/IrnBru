@@ -3,14 +3,14 @@ from nltk import NaiveBayesClassifier
 from nltk.featstruct import FeatStruct
 
 from topics_editor.models import Topic
-from factors_trainer.factor import *
+from factors_trainer.factors import *
 from factors_trainer.models import Factor
 
 class FactorsClassifier():
     def __init__(self, topic_name):
         topic = Topic.objects.get(topic=topic_name)
         self.train_set = self.get_train_set(topic)
-        self.classifier = train_factor_classifier(self.train_set)
+        self.classifier = self.train_factor_classifier(self.train_set)
 
     def __get_pos_pattern_from_factor__(self, factor):
         sentence = factor.factor
@@ -35,3 +35,4 @@ class FactorsClassifier():
     def train_factor_classifier(self, train_set):
         classifier = NaiveBayesClassifier(train_set)
         return classifier
+
