@@ -5,12 +5,9 @@
 {% endblock %}
 
 {% block content %}
-<div id='sentiments' class='container'>
-    {% for sentiment in sentiments %}
-    <div class='list-group'>
-        <a href='{{ sentiment }}' class='list-group-item'>{{ forloop.counter}}. {{ sentiment }}</a>
-    </div>
-    {% endfor %}
+{% for sentiment in sentiments %}
+<div class='list-group'>
+    <a href='{{ sentiment }}' class='list-group-item'>{{ forloop.counter}}. {{ sentiment }}</a>
 </div>
+{% endfor %}
 {% endblock %}
-

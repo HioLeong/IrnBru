@@ -72,7 +72,7 @@ def aggregate_pos_tags(pos_tags):
 def get_factor_word_list(factor):
     word_toks = word_tokenize(factor.factor)
     stop_words = stopwords.words('english')
-    filtered_toks = [t for t in toks if not t in stop_words]
+    filtered_toks = [t for t in word_toks if not t in stop_words]
     word_list = []
     for tok in filtered_toks:
         if tok not in word_list:

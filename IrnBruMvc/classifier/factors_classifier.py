@@ -6,7 +6,7 @@ from topics_editor.models import Topic
 from factors_trainer.factors import *
 from factors_trainer.models import Factor
 
-class FactorsClassifier():
+class FactorsClassifier:
     def __init__(self, topic_name):
         topic = Topic.objects.get(topic=topic_name)
         self.train_set = self.get_train_set(topic)
@@ -22,17 +22,21 @@ class FactorsClassifier():
         topic_factors = Factor.objects.filter(topic=topic)
         # Does not take into consideration Neutrals
         sentiment_factors  = [factor for factor in topic_factors if factor.sentiment in ['Yes','No']]
-        train_set = [(factor,factor.sentiment) for factor in sentiment_factors]
+        train_set = [(self.factor_features(factor),factor.sentiment) for factor in sentiment_factors]
         return train_set
 
     def factor_features(self, factor):
         word_freq = get_factor_word_list(factor)
         word_freq_feat = FeatStruct(word_freq)
+        word_freq_feat.freeze()
         pos_pattern = self.__get_pos_pattern_from_factor__(factor)
-        feature = FeatStruct(pattern=pos_pattern, words=word_freq)
+        pat_feat = FeatStruct(pattern=pos_pattern)
+        pat_feat.freeze()
+        feature = FeatStruct(pattern=pat_feat, words=word_freq)
+        feature.freeze()
         return feature
 
     def train_factor_classifier(self, train_set):
-        classifier = NaiveBayesClassifier(train_set)
+        classifier = NaiveBayesClassifier.train(train_set)
         return classifier
 

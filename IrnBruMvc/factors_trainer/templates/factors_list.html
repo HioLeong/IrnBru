@@ -6,29 +6,27 @@
 
 {% block content %}
 <h3> Count: {{ factors.count }} </h3>
-<div id='factors' class='container'>
-    {% for factor in factors %}
-    <div class='row'>
-        <div class='col-md-9'>{{ factor.factor }}</div>
-        <div class='col-md-3'>
-            <form action="{% url 'factors_trainer:update_factor' factor.id %}" method="POST">
-                {% csrf_token %}
-                <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-primary">
-                        <input type="checkbox" name="sentiment" value='Yes' autocomplete="off"/> Yes
-                    </label>
-                    <label class="btn btn-primary">
-                        <input type="checkbox" name="sentiment" value='No' autocomplete="off"/> No
-                    </label>
-                    <label class="btn btn-primary">
-                        <input type="checkbox" name="sentiment" value='Neutral' autocomplete="off"/> Neutral
-                    </label>
-                </div>
-            </form>
-        </div>
+{% for factor in factors %}
+<div class='row'>
+    <div class='col-md-9'>{{ factor.factor }}</div>
+    <div class='col-md-3'>
+        <form action="{% url 'factors_trainer:update_factor' factor.id %}" method="POST">
+            {% csrf_token %}
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-primary">
+                    <input type="checkbox" name="sentiment" value='Yes' autocomplete="off"/> Yes
+                </label>
+                <label class="btn btn-primary">
+                    <input type="checkbox" name="sentiment" value='No' autocomplete="off"/> No
+                </label>
+                <label class="btn btn-primary">
+                    <input type="checkbox" name="sentiment" value='Neutral' autocomplete="off"/> Neutral
+                </label>
+            </div>
+        </form>
     </div>
-    <hr/>
-    {% endfor %}
 </div>
+<hr/>
+{% endfor %}
 {% endblock %}
 

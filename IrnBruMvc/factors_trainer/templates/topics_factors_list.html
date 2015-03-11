@@ -5,12 +5,10 @@ Topics Factors Listing
 {% endblock %}
 
 {% block content %}
-<div id='topics_factors' class='container'>
     {% for topic in topics %}
     <div class='list-group'>
         <a href='get_factor/{{ topic.topic }}' class='list-group-item'>{{ forloop.counter}}. {{ topic.topic }}</a>
     </div>
     {% endfor %}
-</div>
 {% endblock %}
 

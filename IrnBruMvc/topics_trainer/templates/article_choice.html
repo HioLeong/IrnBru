@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_topics_trainer.html" %}
 {% load staticfiles %}
 
 {% block title %}
@@ -10,29 +10,33 @@ Invalid Article
 {% endblock %}
 
 {% block content %}
+<div class="col-md-10"> 
 {% for sent in article.body%}
-<p> {{ sent }} </p>
+    <p> {{ sent }} </p>
 {% endfor %}
+</div>
 {% endblock %}
 
 {% block topics %}
-<h3> Topics </h3>
-<form action="{% url 'topics_trainer:update_topic' article.id %}" method="POST">
-    {% csrf_token %}
-    <div class="checkbox">
-        {% for topic in topics %}
-        <label class="topic_label">
-            {% if topic.id in chosen_topics %}
-            <input type="checkbox" name="topics" id="topics"  value="{{ topic.id }}" checked/> 
-            {% else %}
-            <input type="checkbox" name="topics" id="topics"  value="{{ topic.id }}"/> 
-            {% endif %}
-            {{ topic.topic }} 
-        </label>
-        {% endfor %}
-    </div>
-    <input type="submit" value="Update"/>
-    <div id="submission_status">
-    </div>
-</form>
+<div class="col-md-2"> 
+    <h3> Topics </h3>
+    <form action="{% url 'topics_trainer:update_topic' article.id %}" method="POST">
+        {% csrf_token %}
+        <div class="checkbox">
+            {% for topic in topics %}
+            <label class="topic_label">
+                {% if topic.id in chosen_topics %}
+                <input type="checkbox" name="topics" id="topics"  value="{{ topic.id }}" checked/> 
+                {% else %}
+                <input type="checkbox" name="topics" id="topics"  value="{{ topic.id }}"/> 
+                {% endif %}
+                {{ topic.topic }} 
+            </label>
+            {% endfor %}
+        </div>
+        <input type="submit" value="Update"/>
+        <div id="submission_status">
+        </div>
+    </form>
+</div>
 {% endblock %}

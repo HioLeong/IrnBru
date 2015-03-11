@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_topics_trainer.html" %}
 {% load staticfiles %}
 
 {% block title %}
@@ -6,9 +6,11 @@ Article List
 {% endblock %}
 
 {% block content %}
-{% for article in articles %}
-<div class='list-group'>
-    <a href='{{ forloop.counter }}' class='list-group-item'>{{ forloop.counter}}. {{ article.title.0 }}</a>
+<div class='col-md-12'>
+    {% for article in articles %}
+    <div class='list-group'>
+        <a href='{{ forloop.counter }}' class='list-group-item'>{{ forloop.counter}}. {{ article.title.0 }}</a>
+    </div>
+    {% endfor %}
 </div>
-{% endfor %}
 {% endblock %}
