@@ -129,6 +129,7 @@ INSTALLED_APPS = (
         'topics_editor',
         'article_summary',
         'factors_trainer',
+        'front_page',
         'classifier',
         'django_mongodb_engine'
         )
