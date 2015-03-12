@@ -8,4 +8,6 @@ def index(request):
     return HttpResponse(template.render(context))
 
 def dashboard(request):
-    # TODO: Implement
+    template = loader.get_template('dashboard.html')
+    context = RequestContext(request, {})
+    return HttpResponse(template.render(context))
