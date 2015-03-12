@@ -1,4 +1,5 @@
 import string
+import nltk
 from nltk import NaiveBayesClassifier
 from nltk.featstruct import FeatStruct
 
@@ -37,7 +38,16 @@ class FactorsClassifier:
         feature.freeze()
         return feature
 
+    def classify(self, factor):
+        return self.classifier.classify(factor)
+
+    def accuracy(self):
+        return nltk.classify.accuracy(self.classifier, self.train_set)
+
     def train_factor_classifier(self, train_set):
         classifier = NaiveBayesClassifier.train(train_set)
         return classifier
+
+    def show_most_informative_features(self):
+        print self.classifier.show_most_informative_features()
 
