@@ -69,8 +69,13 @@ def aggregate_pos_tags(pos_tags):
         aggregate += '<' + tag + '>'
     return aggregate
 
+def remove_punctuations(sentence):
+    return ''.join(ch for ch in sentence if ch not in set(punctuation))
+
 def get_factor_word_list(factor):
-    word_toks = word_tokenize(factor.factor)
+    factor_sent = remove_punctuations(factor.factor)
+    factor_sent.lower()
+    word_toks = word_tokenize(factor_sent)
     stop_words = stopwords.words('english')
     filtered_toks = [t for t in word_toks if not t in stop_words]
     word_list = []

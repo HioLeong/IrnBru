@@ -34,7 +34,7 @@ class FactorsClassifier:
         pos_pattern = self.__get_pos_pattern_from_factor__(factor)
         pat_feat = FeatStruct(pattern=pos_pattern)
         pat_feat.freeze()
-        feature = FeatStruct(pattern=pat_feat, words=word_freq_feat)
+        feature = FeatStruct(words=word_freq_feat)
         feature.freeze()
         return feature
 
@@ -50,4 +50,8 @@ class FactorsClassifier:
 
     def show_most_informative_features(self):
         print self.classifier.show_most_informative_features()
+
+    def test(self):
+        print self.accuracy()
+        print self.show_most_informative_features()
 
