@@ -10,6 +10,7 @@ class FactorsClassifier:
     def __init__(self, topic_name):
         topic = Topic.objects.get(topic=topic_name)
         self.train_set = self.get_train_set(topic)
+        print self.train_set
         self.classifier = self.train_factor_classifier(self.train_set)
 
     def __get_pos_pattern_from_factor__(self, factor):
@@ -32,7 +33,7 @@ class FactorsClassifier:
         pos_pattern = self.__get_pos_pattern_from_factor__(factor)
         pat_feat = FeatStruct(pattern=pos_pattern)
         pat_feat.freeze()
-        feature = FeatStruct(pattern=pat_feat, words=word_freq)
+        feature = FeatStruct(pattern=pat_feat, words=word_freq_feat)
         feature.freeze()
         return feature
 
