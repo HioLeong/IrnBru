@@ -76,3 +76,9 @@ class SimpleTest(TestCase):
         expected = ['hello', 'world', 'foo', 'bar']
         actual = get_factor_word_list(word_list)
         self.assertEqual(expected, actual)
+
+    def test_get_trigrams_features(self):
+        sent = 'Hello world, how are you today?'
+        print get_trigrams_features(sent)
+        # TODO: Finish
+

@@ -1,6 +1,7 @@
 import string
 import nltk
 from nltk import NaiveBayesClassifier
+from nltk.util import ngrams
 from nltk.featstruct import FeatStruct
 
 from topics_editor.models import Topic
@@ -31,9 +32,9 @@ class FactorsClassifier:
         word_freq = get_factor_word_list(factor)
         word_freq_feat = FeatStruct(word_freq)
         word_freq_feat.freeze()
-        pos_pattern = self.__get_pos_pattern_from_factor__(factor)
-        pat_feat = FeatStruct(pattern=pos_pattern)
-        pat_feat.freeze()
+        #pos_pattern = self.__get_pos_pattern_from_factor__(factor)
+        #pat_feat = FeatStruct(pattern=pos_pattern)
+        #pat_feat.freeze()
         feature = FeatStruct(words=word_freq_feat)
         feature.freeze()
         return feature

@@ -2,6 +2,8 @@ from string import punctuation
 import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
+from nltk.util import ngrams
+from nltk.featstruct import FeatStruct
 
 from topics_editor.models import Topic
 from factors_trainer.models import Factor
@@ -50,8 +52,8 @@ def update_factors():
                     sentiment = '',
                     article = sent_art_tuple[1])
 
-def get_next_factor():
-    return Factor.objects.filter(sentiment='')[0]
+            def get_next_factor():
+                return Factor.objects.filter(sentiment='')[0]
 
 def get_factors_for_topic(topic):
     return Factor.objects.filter(topic_id=topic.id)
@@ -83,3 +85,18 @@ def get_factor_word_list(factor):
         if tok not in word_list:
             word_list.append(tok)
     return word_list
+
+def get_trigrams_features(factor_sentence):
+    print factor_sentence
+    factor_toks = word_tokenize(factor_sentence)
+    factor_trigrams = get_ngrams_of_factor(factor_toks, 3)
+    feat_list = []
+    for trigram in factor_trigrams:
+        feat_list.append(get_trigram_featstruct(trigram))
+    return feat_list
+
+def get_ngrams_of_factor(factor_toks, n=3):
+    return list(ngrams(factor_toks, n))
+
+def get_trigram_featstruct(trigram_tuple):
+    return FeatStruct(x=trigram_tuple[0],y=trigram_tuple[1],z=trigram_tuple[2])
