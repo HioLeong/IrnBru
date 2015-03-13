@@ -92,7 +92,9 @@ def get_trigrams_features(factor_sentence):
     factor_trigrams = get_ngrams_of_factor(factor_toks, 3)
     feat_list = []
     for trigram in factor_trigrams:
-        feat_list.append(get_trigram_featstruct(trigram))
+        feature = get_trigram_featstruct(trigram)
+        feature.freeze()
+        feat_list.append(feature)
     return feat_list
 
 def get_ngrams_of_factor(factor_toks, n=3):

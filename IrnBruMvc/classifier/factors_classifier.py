@@ -35,7 +35,9 @@ class FactorsClassifier:
         #pos_pattern = self.__get_pos_pattern_from_factor__(factor)
         #pat_feat = FeatStruct(pattern=pos_pattern)
         #pat_feat.freeze()
-        feature = FeatStruct(words=word_freq_feat)
+        trigram_feat = FeatStruct(get_trigrams_features(factor.factor))
+        trigram_feat.freeze()
+        feature = FeatStruct(words=word_freq_feat,trigram=trigram_feat)
         feature.freeze()
         return feature
 
