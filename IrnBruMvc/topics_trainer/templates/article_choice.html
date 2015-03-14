@@ -11,32 +11,41 @@ Invalid Article
 
 {% block content %}
 <div class="col-md-10"> 
-{% for sent in article.body%}
-    <p> {{ sent }} </p>
-{% endfor %}
+    <div class='panel panel-default'>
+        <div class='panel-heading'> Article </div>
+        <div class='panel-body'>
+            {% for sent in article.body%}
+            <p> {{ sent }} </p>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 {% endblock %}
 
 {% block topics %}
 <div class="col-md-2"> 
-    <h3> Topics </h3>
-    <form action="{% url 'topics_trainer:update_topic' article.id %}" method="POST">
-        {% csrf_token %}
-        <div class="checkbox">
-            {% for topic in topics %}
-            <label class="topic_label">
-                {% if topic.id in chosen_topics %}
-                <input type="checkbox" name="topics" id="topics"  value="{{ topic.id }}" checked/> 
-                {% else %}
-                <input type="checkbox" name="topics" id="topics"  value="{{ topic.id }}"/> 
-                {% endif %}
-                {{ topic.topic }} 
-            </label>
-            {% endfor %}
+    <div class='panel panel-default'>
+        <div class='panel-heading'> Topic </div>
+        <div class='panel-body'>
+            <form action="{% url 'topics_trainer:update_topic' article.id %}" method="POST">
+                {% csrf_token %}
+                <div class="checkbox">
+                    {% for topic in topics %}
+                    <label class="topic_label">
+                        <div class='checkbox'>
+                            {% if topic.id in chosen_topics %}
+                            <input type="checkbox" name="topics" id="topics"  value="{{ topic.id }}" checked/> 
+                            {% else %}
+                            <input type="checkbox" name="topics" id="topics"  value="{{ topic.id }}"/> 
+                            {% endif %}
+                            {{ topic.topic.title }} 
+                        </div>
+                    </label>
+                    {% endfor %}
+                </div>
+                <input type="submit" value="Update"/>
+            </form>
         </div>
-        <input type="submit" value="Update"/>
-        <div id="submission_status">
-        </div>
-    </form>
+    </div>
 </div>
 {% endblock %}
