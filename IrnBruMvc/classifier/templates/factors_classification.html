@@ -1,0 +1,46 @@
+{% extends "base_classification.html" %}
+{% load staticfiles %}
+
+{% block title %}
+Classify your article
+{% endblock %}
+
+{% block sources %}
+<link href="{% static "dist/css/factors_classification.css" %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block content %}
+<form role="form">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#copy" data-toggle="tab" aria-expanded="true">Copy Over</a>
+                </li>
+                <li>
+                    <a href="#file" data-toggle="tab" aria-expanded="true">Send Over</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="copy" class="tab-pane fade active in"> 
+                    <h4>Show us your article</h4>
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="Paste your article here..."></textarea>
+                    </div>
+                </div>
+                <div id="file" class="tab-pane fade">
+                    <h4>Send us your article</h4>
+                    <div class="form-group">
+                        <input type="file"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <input type='submit' value='Classify' class='btn btn-outline btn-primary btn-lg btn-block'/>
+        </div>
+    </div>
+</form>
+{% endblock %}
