@@ -10,47 +10,52 @@ Classify your article
 {% endblock %}
 
 {% block content %}
-<form role="form">
-    <div class="row">
-        <div class="col-md-12">
-            <ul class="nav nav-tabs">
-                <li class="active">
-                    <a href="#copy" data-toggle="tab" aria-expanded="true">Copy Over</a>
-                </li>
-                <li>
-                    <a href="#file" data-toggle="tab" aria-expanded="true">Send Over</a>
-                </li>
-                <li>
-                    <a href="#url" data-toggle="tab" aria-expanded="true">URL</a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <div id="copy" class="tab-pane fade active in"> 
+<div class="row">
+    <div class="col-md-12">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#copy" data-toggle="tab" aria-expanded="true">Copy Over</a>
+            </li>
+            <li>
+                <a href="#file" data-toggle="tab" aria-expanded="true">Send Over</a>
+            </li>
+            <li>
+                <a href="#url" data-toggle="tab" aria-expanded="true">URL</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="copy" class="tab-pane fade active in"> 
+                <form action='{% url 'classifier:classify_article' 'arttext' %}' method='POST' role="form">
+                    {% csrf_token %}
                     <h4>Show us your article</h4>
                     <div class="form-group">
-                        <textarea class="form-control" placeholder="Paste your article here..."></textarea>
+                        <textarea name='article-textarea' class="form-control" placeholder="Paste your article here..."></textarea>
                     </div>
-                </div>
-                <div id="file" class="tab-pane fade">
+        <input type='submit' value='Classify' class='btn btn-outline btn-primary btn-lg btn-block'/>
+                </form>
+            </div>
+            <div id="file" class="tab-pane fade">
+                <form action='{% url 'classifier:classify_article' 'artfile' %}' method='POST' role="form">
+                    {% csrf_token %}
                     <h4>Send us your article</h4>
                     <div class="form-group">
                         <input type="file"/>
                     </div>
-                </div>
+        <input type='submit' value='Classify' class='btn btn-outline btn-primary btn-lg btn-block'/>
+                </form>
+            </div>
 
-                <div id="url" class="tab-pane fade">
+            <div id="url" class="tab-pane fade">
+                <form action='{% url 'classifier:classify_article' 'arturl' %}' method='POST' role="form">
+                    {% csrf_token %}
                     <h4>Link us up</h4>
                     <div class="form-group">
                         <input type='text' placeholder='Paste your article URL here' class='form-control' id='article-url'/>
                     </div>
-                </div>
+                    <input type='submit' value='Classify' class='btn btn-outline btn-primary btn-lg btn-block'/>
+                </form>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <input type='submit' value='Classify' class='btn btn-outline btn-primary btn-lg btn-block'/>
-        </div>
-    </div>
-</form>
+</div>
 {% endblock %}
