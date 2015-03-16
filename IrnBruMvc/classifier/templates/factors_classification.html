@@ -25,34 +25,34 @@ Classify your article
         </ul>
         <div class="tab-content">
             <div id="copy" class="tab-pane fade active in"> 
-                <form action='{% url 'classifier:classify_article' 'arttext' %}' method='POST' role="form">
+                <form action='{% url 'classifier:classify_article' %}' method='POST' role="form">
                     {% csrf_token %}
                     <h4>Show us your article</h4>
                     <div class="form-group">
-                        <textarea name='article-textarea' class="form-control" placeholder="Paste your article here..."></textarea>
+                        <textarea name='article-text' class="form-control" placeholder="Paste your article here..."></textarea>
                     </div>
-        <input type='submit' value='Classify' class='btn btn-outline btn-primary btn-lg btn-block'/>
+                    <button type='submit' name='article-type' value='article-text' class='btn btn-outline btn-primary btn-lg btn-block'>Classify</button>
                 </form>
             </div>
             <div id="file" class="tab-pane fade">
-                <form action='{% url 'classifier:classify_article' 'artfile' %}' method='POST' role="form">
+                <form action='{% url 'classifier:classify_article' %}' method='POST' role="form">
                     {% csrf_token %}
                     <h4>Send us your article</h4>
                     <div class="form-group">
-                        <input type="file"/>
+                        <input name='article-file' type="file"/>
                     </div>
-        <input type='submit' value='Classify' class='btn btn-outline btn-primary btn-lg btn-block'/>
+                    <button type='submit' name='article-type' value='article-text' class='btn btn-outline btn-primary btn-lg btn-block'>Classify</button>
                 </form>
             </div>
 
             <div id="url" class="tab-pane fade">
-                <form action='{% url 'classifier:classify_article' 'arturl' %}' method='POST' role="form">
+                <form action='{% url 'classifier:classify_article' %}' method='POST' role="form">
                     {% csrf_token %}
                     <h4>Link us up</h4>
                     <div class="form-group">
-                        <input type='text' placeholder='Paste your article URL here' class='form-control' id='article-url'/>
+                        <input name='article-url' type='text' placeholder='Paste your article URL here' class='form-control' id='article-url'/>
                     </div>
-                    <input type='submit' value='Classify' class='btn btn-outline btn-primary btn-lg btn-block'/>
+                    <button type='submit' name='article-type' value='Classify' class='btn btn-outline btn-primary btn-lg btn-block'>Classify</button>
                 </form>
             </div>
         </div>
