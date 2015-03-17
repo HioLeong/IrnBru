@@ -17,9 +17,9 @@ class TopicsClassifier:
         label_topic = []
         for topic in Topic.objects.all():
             topic_choices = get_choices_of_topic(topic.id)
-        for choice in topic_choices:
-            article = get_article_from_choice(choice)
-            label_topic.append((article, topic.topic))
+            for choice in topic_choices:
+                article = get_article_from_choice(choice)
+                label_topic.append((article, topic.topic))
         train_set = [(self.topic_features(n), topic) for (n,topic) in label_topic]
         return train_set
 
@@ -47,12 +47,7 @@ class TopicsClassifier:
         return classifier
 
     def classify(self, article):
-        return classifier.classify(article)
+        return self.classifier.classify(self.topic_features(article))
 
     def get_classifier_accuracy(self, classifier, train_set):
         return nltk.classify.accuracy(classifier, train_set)
-
-    def test():
-        t_set = self.get_train_set()
-        classifier = self.train_topic_classifier(t_set)
-        self.get_classifier_accuracy(classifier, t_set)
