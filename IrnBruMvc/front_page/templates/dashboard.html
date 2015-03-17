@@ -1,4 +1,5 @@
 {% extends "base_dashboard.html" %}
+{% load staticfiles %}
 
 {% block title %}
 Dashboard
@@ -52,9 +53,9 @@ Dashboard
 <div class='row'>
     <div class='col-md-6'>
         <div class='panel panel-default'>
-            <div class='panel-heading'> Topics Summary </div>
+            <div class='panel-heading'> Topic Articles Count</div>
             <div class='panel-body'> 
-                <div id='topics_donut'>
+                <div id='topics-donut'>
                 </div>
             </div>
         </div>
@@ -62,5 +63,5 @@ Dashboard
 {% endblock %}
 
 {% block sources %}
-<script src='js/dashboard.js'></script>
+<script src='{% static 'js/dashboard.js' %}'></script>
 {% endblock %}

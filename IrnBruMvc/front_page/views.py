@@ -22,5 +22,6 @@ def get_topics_articles_count(request):
     topics  = Topic.objects.all()
     for topic in topics:
         topic_count = Choice.objects.filter(topic__contains=topic.id).count()
-        data.append((topic.topic, topic_count))
+        data.append({'label': topic.topic.title(),
+            'value': topic_count})
     return HttpResponse(json.dumps(data), content_type='application/json')
