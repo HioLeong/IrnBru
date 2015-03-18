@@ -16,7 +16,7 @@ Article List
         <tbody>
             {% for article in articles %}
             <tr>
-                <td> <a href='{{ forloop.counter }}'>{{ article.title.0 }} </a></td>
+                <td> <a href='{{ article.id }}'>{{ article.title.0 }} </a></td>
             </tr>
             {% endfor %}
         </tbody>

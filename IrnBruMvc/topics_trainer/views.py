@@ -13,8 +13,8 @@ def index(request):
         })
     return HttpResponse(template.render(context))
 
-def article_choice(request, article_index):
-    article = Article.objects.all()[int(article_index)]
+def article_choice(request, article_id):
+    article = Article.objects.get(id=article_id)
     topics = Topic.objects.all()
 
     template = loader.get_template('article_choice.html')
