@@ -95,4 +95,3 @@ class SimpleTest(TestCase):
         sent_art_tuple = ('Oil is good', article)
         actual = create_factor_from_sent_art_tuple(sent_art_tuple, topic)
         self.assertEqual(expected, actual)
-

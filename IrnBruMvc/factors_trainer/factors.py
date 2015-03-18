@@ -47,11 +47,6 @@ def update_factors():
         factor_sentences = get_factor_sentences_for_topic(t)
         for sent_art_tuple in factor_sentences:
             create_factor_from_sent_art_tuple(sent_art_tuple)
-            Factor.objects.create(
-                    topic = t,
-                    factor = sent_art_tuple[0],
-                    sentiment = '',
-                    article = sent_art_tuple[1])
 
 def create_factor_from_sent_art_tuple(sent_art_tuple, topic):
     # Create Factor if factor does not exist
