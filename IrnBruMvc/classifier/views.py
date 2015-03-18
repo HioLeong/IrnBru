@@ -11,6 +11,7 @@ from classifier.factors_classifier import *
 
 import collections
 
+classifier = TopicsClassifier()
 
 def index(request):
     template = loader.get_template('factors_classification.html')
@@ -18,7 +19,6 @@ def index(request):
     return HttpResponse(template.render(context))
 
 def get_article_classification(article):
-    classifier = TopicsClassifier()
     body = sent_tokenize(article)
     article_obj = Article(title='', body=body)
     return classifier.classify(article_obj)
@@ -26,9 +26,13 @@ def get_article_classification(article):
 def get_classify_distribution(dist):
     data = []
     for label in dist.samples():
-        data.append({'label':label, 'value': dist.prob(label)})
+        percent = int(100*(round(dist.prob(label),2)))
+        data.append({'label':label, 
+        'value': dist.prob(label), 
+        'percent': percent
+        })
         print('%s: %f' % (label, dist.prob(label)))
-    return data
+    return sorted(data, key=lambda dist:dist['value'], reverse=True)
 
 def classify_article(request):
     if request.POST:

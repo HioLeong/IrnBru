@@ -7,9 +7,16 @@ Article Report
 
 {% block content %}
 <div class='row'>
-    {% for dist in data %}
-
-    {% endfor %}
+    <div class='col-md-4'>
+        <div class='panel panel-default'>
+            <div class='panel-heading'>Topics Classification</div>
+            <div class='panel-body'>
+                {% for dist in data %}
+                <h{{forloop.counter}}>{{ dist.label }} <small> {{ dist.percent }}% </small></h1>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
 
