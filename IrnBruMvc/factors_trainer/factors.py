@@ -46,14 +46,29 @@ def update_factors():
     for t in topics:
         factor_sentences = get_factor_sentences_for_topic(t)
         for sent_art_tuple in factor_sentences:
+            create_factor_from_sent_art_tuple(sent_art_tuple)
             Factor.objects.create(
                     topic = t,
                     factor = sent_art_tuple[0],
                     sentiment = '',
                     article = sent_art_tuple[1])
 
-            def get_next_factor():
-                return Factor.objects.filter(sentiment='')[0]
+def create_factor_from_sent_art_tuple(sent_art_tuple, topic):
+    # Create Factor if factor does not exist
+    if not Factor.objects.filter(factor=sent_art_tuple[0]).exists():
+        Factor.objects.create(
+                topic = topic,
+                factor = sent_art_tuple[0],
+                sentiment = '',
+                article = sent_art_tuple[1])
+        return True
+    else: 
+        return False
+            
+
+
+def get_next_factor():
+    return Factor.objects.filter(sentiment='')[0]
 
 def get_factors_for_topic(topic):
     return Factor.objects.filter(topic_id=topic.id)

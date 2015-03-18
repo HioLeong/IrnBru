@@ -11,11 +11,13 @@ class SimpleTest(TestCase):
                     WordFrequency(word='world', frequency=5)])
         article_object = Article.objects.create(title='Hello goodbye', body=['there. how are you world?', 'how about a hello world?'])
         Choice.objects.create(choice=article_object, topic = ['energy'])
+        Factor.objects.create(factor='Oil is bad', sentiment='', article=article_object, topic=topic_object)
 
     def tearDown(self):
         Topic.objects.all().delete()
         Article.objects.all().delete()
         Choice.objects.all().delete()
+        Factor.objects.all().delete()
 
     def test_sent_contains_topic_common_words(self):
         if Topic.objects.count() == 0:
@@ -81,4 +83,16 @@ class SimpleTest(TestCase):
         sent = 'Hello world, how are you today?'
         print get_trigrams_features(sent)
         # TODO: Finish
+
+    def test_create_factor_from_sent_art_tuple(self):
+        article = Article.objects.get()
+        topic = Topic.objects.get()
+        sent_art_tuple = ('Oil is bad', article)
+        expected = False
+        actual = create_factor_from_sent_art_tuple(sent_art_tuple, topic)
+        self.assertEqual(expected, actual)
+        expected = True
+        sent_art_tuple = ('Oil is good', article)
+        actual = create_factor_from_sent_art_tuple(sent_art_tuple, topic)
+        self.assertEqual(expected, actual)
 
