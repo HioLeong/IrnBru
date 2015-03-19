@@ -11,6 +11,8 @@ var trainer = {
 };
 
 $(document).ready(function(){
+    $('#factors-table').DataTable({
+    });
     $('input[type=checkbox]').on('change',function(event) {
         event.preventDefault();
         var form = $(this).closest('form');

@@ -19,16 +19,16 @@
             <tr>
                 <td> {{ factor.factor }} </td>
                 <td> 
-                    <form style='width:180px' action="{% url 'factors_trainer:update_factor' factor.id %}" method="POST">
+                    <form class='text-center' style='width:180px' action="{% url 'factors_trainer:update_factor' factor.id %}" method="POST">
                         {% csrf_token %}
                         <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-primary">
+                            <label class="btn btn-outline btn-primary">
                                 <input type="checkbox" name="sentiment" value='Yes' autocomplete="off"/> Yes
                             </label>
-                            <label class="btn btn-primary">
+                            <label class="btn btn-outline btn-primary">
                                 <input type="checkbox" name="sentiment" value='No' autocomplete="off"/> No
                             </label>
-                            <label class="btn btn-primary">
+                            <label class="btn btn-outline btn-primary">
                                 <input type="checkbox" name="sentiment" value='Neutral' autocomplete="off"/> Neutral
                             </label>
                         </div>
@@ -42,12 +42,5 @@
 {% endblock %}
 
 {% block sources %}
-<script src="{% static "javascripts/factors_trainer.js" %}"></scirpt>
-<script>
-    $(document).ready(function() {
-        $('#factors-table').DataTable({
-                "autoWidth": true
-        });
-    });
-</script>
+<script src="{% static "javascripts/factors_trainer.js" %}"></script>
 {% endblock %}
