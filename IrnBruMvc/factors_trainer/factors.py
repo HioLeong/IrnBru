@@ -38,7 +38,7 @@ def get_factor_sentences_for_topic(topic):
     for article in articles:
         for sentence in get_sentences_from_article(article):
             sentence_article_tuple.append((sentence,article))
-    factor_sentences = [s for s in sentence_article_tuple if sent_contains_topic_common_words(s[0], topic.topic)]
+    #factor_sentences = [s for s in sentence_article_tuple if sent_contains_topic_common_words(s[0], topic.topic)]
     return factor_sentences
 
 def update_factors():
