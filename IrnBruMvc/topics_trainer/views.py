@@ -5,9 +5,16 @@ from django.template import RequestContext, loader
 from topics_trainer.models import Article, Choice
 from topics_editor.models import Topic
 
+def choice_exists(article):
+    choice = Choice.objects.filter(choice=article)
+    if choice.exists():
+        return 'Done'
+    else:
+        return ''
+
 def index(request):
     template = loader.get_template('articles_list.html')
-    articles = Article.objects.all()
+    articles = [(article, choice_exists(article)) for article in Article.objects.all()]
     context = RequestContext(request, {
         'articles': articles
         })

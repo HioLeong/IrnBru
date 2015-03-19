@@ -11,13 +11,14 @@ Article List
         <thead>
             <tr>
                 <th> Article Title </th>
+                <th> Labeled </th>
             </tr>
         </thead>
         <tbody>
             {% for article in articles %}
             <tr>
-                <td> <a href='{{ article.id }}'>{{ article.title.0 }} </a></td>
-            </tr>
+                <td> <a href='{{ article.0.id }}'>{{ article.0.title.0 }} </a></td>
+                <td> {{article.1}}</td> </tr>
             {% endfor %}
         </tbody>
     </table>
