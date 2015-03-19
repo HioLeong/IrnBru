@@ -7,40 +7,42 @@ var trainer = {
             },'json');
             return false;
         });
+    },
+    refreshInput: function() {
+        $('input[type=checkbox]').on('change',function(event) {
+        event.preventDefault();
+        var form = $(this).closest('form');
+        $(form).on('submit',function(event) { 
+            event.preventDefault();
+            var postData = $(this).serializeArray();
+            var formUrl = $(this).attr('action');
+            $.ajax(
+                {
+                    url: formUrl, 
+                    type: 'POST',
+                    data: postData,
+                    success: function(data, textStatus, jqHr) {
+                        $(form).closest('tr').hide();
+                        console.log(data);
+                        return true;
+                    },
+                    error: function(jqHr, textStatus, errorThrown) {
+                        return false;
+                    }
+                }
+            );
+        });
+        $(form).submit();
+        $(form).unbind('submit');
+    });
     }
 };
 
 $(document).ready(function(){
     $('#factors-table').DataTable();
+    trainer.refreshInput();
     $('#factors-table').on( 'draw.dt', function () {
-        console.log( 'Table redrawn' );
-        $('input[type=checkbox]').on('change',function(event) {
-            event.preventDefault();
-            var form = $(this).closest('form');
-            $(form).on('submit',function(event) { 
-                event.preventDefault();
-                var postData = $(this).serializeArray();
-                var formUrl = $(this).attr('action');
-                $.ajax(
-                    {
-                        url: formUrl, 
-                        type: 'POST',
-                        data: postData,
-                        success: function(data, textStatus, jqHr) {
-                            $(form).closest('tr').hide();
-                            console.log(data);
-                            return true;
-                        },
-                        error: function(jqHr, textStatus, errorThrown) {
-                            return false;
-                        }
-                    }
-                );
-            });
-            $(form).submit();
-            $(form).unbind('submit');
-        });
-
+        trainer.refreshInput();
     } );
 });
 
