@@ -24,7 +24,7 @@ $(document).ready(function(){
                     type: 'POST',
                     data: postData,
                     success: function(data, textStatus, jqHr) {
-                        $(form).closest('div[class=row]').hide();
+                        $(form).closest('tr').hide();
                         console.log(data);
                         return true;
                     },

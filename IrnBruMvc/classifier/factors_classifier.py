@@ -10,8 +10,8 @@ from factors_trainer.models import Factor
 
 class FactorsClassifier:
     def __init__(self, topic_name):
-        topic = Topic.objects.get(topic=topic_name)
-        self.train_set = self.get_train_set(topic)
+        self.topic = Topic.objects.get(topic=topic_name)
+        self.train_set = self.get_train_set(self.topic)
         print self.train_set
         self.classifier = self.train_factor_classifier(self.train_set)
 
@@ -32,9 +32,6 @@ class FactorsClassifier:
         word_freq = get_factor_word_list(factor)
         word_freq_feat = FeatStruct(word_freq)
         word_freq_feat.freeze()
-        #pos_pattern = self.__get_pos_pattern_from_factor__(factor)
-        #pat_feat = FeatStruct(pattern=pos_pattern)
-        #pat_feat.freeze()
         trigram_feat = FeatStruct(get_trigrams_features(factor.factor))
         trigram_feat.freeze()
         feature = FeatStruct(words=word_freq_feat,trigram=trigram_feat)
@@ -43,6 +40,11 @@ class FactorsClassifier:
 
     def classify(self, factor):
         return self.classifier.classify(factor)
+
+    def classify_sentence(self, sentence):
+        article = Article(title='title',body=['body'])
+        factor = Factor(factor=sentence, topic=self.topic, sentiment='', article=article)
+        return self.classifier.prob_classify(self.factor_features(factor))
 
     def accuracy(self):
         return nltk.classify.accuracy(self.classifier, self.train_set)
@@ -57,4 +59,7 @@ class FactorsClassifier:
     def test(self):
         print self.accuracy()
         print self.show_most_informative_features()
-
+        dist = self.classify_sentence('The oil is going to run out')
+        for label in dist.samples():
+            print label
+            print dist.prob(label)
