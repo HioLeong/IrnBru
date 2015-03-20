@@ -11,7 +11,17 @@ Article Report
         <div class='panel panel-default'>
             <div class='panel-heading'>Topics Classification</div>
             <div class='panel-body'>
-                {% for dist in data %}
+                {% for dist in article_data %}
+                <h{{forloop.counter}}>{{ dist.label }} <small> {{ dist.percent }}% </small></h1>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class='col-md-4'>
+        <div class='panel panel-default'>
+            <div class='panel-heading'>Factors Classification</div>
+            <div class='panel-body'>
+                {% for dist in article_data %}
                 <h{{forloop.counter}}>{{ dist.label }} <small> {{ dist.percent }}% </small></h1>
                 {% endfor %}
             </div>

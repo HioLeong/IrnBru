@@ -12,7 +12,6 @@ class FactorsClassifier:
     def __init__(self, topic_name):
         self.topic = Topic.objects.get(topic=topic_name)
         self.train_set = self.get_train_set(self.topic)
-        print self.train_set
         self.classifier = self.train_factor_classifier(self.train_set)
 
     def __get_pos_pattern_from_factor__(self, factor):
@@ -52,14 +51,3 @@ class FactorsClassifier:
     def train_factor_classifier(self, train_set):
         classifier = NaiveBayesClassifier.train(train_set)
         return classifier
-
-    def show_most_informative_features(self):
-        print self.classifier.show_most_informative_features()
-
-    def test(self):
-        print self.accuracy()
-        print self.show_most_informative_features()
-        dist = self.classify_sentence('The oil is going to run out')
-        for label in dist.samples():
-            print label
-            print dist.prob(label)

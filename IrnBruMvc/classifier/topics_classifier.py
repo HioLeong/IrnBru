@@ -12,8 +12,6 @@ class TopicsClassifier:
     def __init__(self):
         self.train_set = self.get_train_set()
         self.classifier = self.train_topic_classifier(self.train_set)
-        print 'Accuracy Rating (Out of 1):'
-        print self.get_classifier_accuracy(self.classifier, self.train_set)
 
     def get_train_set(self):
         label_topic = []
@@ -33,7 +31,6 @@ class TopicsClassifier:
         toks = [t.lower() for t in body_toks]
         filtered_toks = [t for t in toks if not t in get_stopwords()]
         filtered_toks = [t for t in filtered_toks if not t in string.punctuation]
-        print filtered_toks
         freqdist = get_freqdist_of_toks(filtered_toks)
         return freqdist.most_common(len(filtered_toks))
 

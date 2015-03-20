@@ -11,7 +11,6 @@ from classifier.factors_classifier import *
 
 import collections
 
-
 def index(request):
     template = loader.get_template('factors_classification.html')
     context = RequestContext(request, {})
@@ -23,6 +22,13 @@ def get_article_classification(article):
     article_obj = Article(title='', body=body)
     return classifier.classify(article_obj)
 
+def get_factors_classification(article, topic):
+    classifier = FactorsClassifier(topic)
+    bodies = sent_tokenize(article)
+    #article_obj = Article(title='', body=bodies)
+    #factors_list = [classifier.classify(sent) for sent in bodies]
+    #return factors_list
+
 def get_classify_distribution(dist):
     data = []
     for label in dist.samples():
@@ -31,7 +37,6 @@ def get_classify_distribution(dist):
         'value': dist.prob(label), 
         'percent': percent
         })
-        print('%s: %f' % (label, dist.prob(label)))
     return sorted(data, key=lambda dist:dist['value'], reverse=True)
 
 def classify_article(request):
@@ -39,9 +44,10 @@ def classify_article(request):
         article = __get_article__(request)
         dist = get_article_classification(article)
         data = get_classify_distribution(dist)
-        print data
+        dist_factors = get_factors_classification(article, dist.max())
         template = loader.get_template('classification_report.html')
-        context = RequestContext(request, { 'data': data })
+        context = RequestContext(request, { 'article_data': data,
+            })
         return HttpResponse(template.render(context))
     else:
         return HttpResponse('No data')
