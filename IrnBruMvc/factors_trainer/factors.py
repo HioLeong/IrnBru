@@ -97,7 +97,6 @@ def get_factor_word_list(factor):
     return word_list
 
 def get_trigrams_features(factor_sentence):
-    print factor_sentence
     factor_toks = word_tokenize(factor_sentence)
     factor_trigrams = get_ngrams_of_factor(factor_toks, 3)
     feat_list = []
