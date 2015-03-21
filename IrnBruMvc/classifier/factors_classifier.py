@@ -38,7 +38,7 @@ class FactorsClassifier:
         return feature
 
     def classify(self, factor):
-        return self.classifier.classify(factor)
+        return self.classifier.classify(self.factor_features(factor))
 
     def classify_sentence(self, sentence):
         article = Article(title='title',body=['body'])

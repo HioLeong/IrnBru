@@ -11,23 +11,24 @@ from classifier.factors_classifier import *
 
 import collections
 
+article_classifier = TopicsClassifier()
+
 def index(request):
     template = loader.get_template('factors_classification.html')
     context = RequestContext(request, {})
     return HttpResponse(template.render(context))
 
 def get_article_classification(article):
-    classifier = TopicsClassifier()
     body = sent_tokenize(article)
     article_obj = Article(title='', body=body)
-    return classifier.classify(article_obj)
+    return article_classifier.classify(article_obj)
 
 def get_factors_classification(article, topic):
     classifier = FactorsClassifier(topic)
     bodies = sent_tokenize(article)
-    #article_obj = Article(title='', body=bodies)
-    #factors_list = [classifier.classify(sent) for sent in bodies]
-    #return factors_list
+    article_obj = Article(title='', body=bodies)
+    factors_list = [classifier.classify_sentence(sent).max() for sent in bodies]
+    return factors_list
 
 def get_classify_distribution(dist):
     data = []
