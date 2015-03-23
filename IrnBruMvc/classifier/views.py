@@ -30,6 +30,21 @@ def get_factors_classification(article, topic):
     factors_list = [classifier.classify_sentence(sent).max() for sent in bodies]
     return factors_list
 
+def get_factors_list_percentage(factors_list):
+    print factors_list
+    yes_percentage = (factors_list.count('Yes')/len(factors_list))*100
+    no_percentage = (factors_list.count('No')/len(factors_list))*100
+    return [
+            {
+                'label': 'Yes',
+                'value': yes_percentage
+                },
+            {
+                'label': 'No',
+                'value': no_percentage
+                }
+            ]
+
 def get_classify_distribution(dist):
     data = []
     for label in dist.samples():
@@ -46,8 +61,10 @@ def classify_article(request):
         dist = get_article_classification(article)
         data = get_classify_distribution(dist)
         dist_factors = get_factors_classification(article, dist.max())
+        factor_data = get_factors_list_percentage(dist_factors)
         template = loader.get_template('classification_report.html')
         context = RequestContext(request, { 'article_data': data,
+            'factor_data': factor_data
             })
         return HttpResponse(template.render(context))
     else:
