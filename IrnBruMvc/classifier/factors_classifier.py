@@ -10,6 +10,7 @@ from factors_trainer.models import Factor
 
 class FactorsClassifier:
     def __init__(self, topic_name):
+        print 'Initialising for ' + topic_name
         self.topic = Topic.objects.get(topic=topic_name)
         self.train_set = self.get_train_set(self.topic)
         self.classifier = self.train_factor_classifier(self.train_set)
@@ -23,17 +24,17 @@ class FactorsClassifier:
     def get_train_set(self, topic):
         topic_factors = Factor.objects.filter(topic=topic)
         # Does not take into consideration Neutrals
-        sentiment_factors  = [factor for factor in topic_factors if factor.sentiment in ['Yes','No']]
+        sentiment_factors  = [factor for factor in topic_factors if factor.sentiment in ['Yes','No','Neutral']]
         train_set = [(self.factor_features(factor),factor.sentiment) for factor in sentiment_factors]
         return train_set
 
     def factor_features(self, factor):
-        word_freq = get_factor_word_list(factor)
-        word_freq_feat = FeatStruct(word_freq)
-        word_freq_feat.freeze()
+        #word_freq = get_factor_word_list(factor)
+        #word_freq_feat = FeatStruct(word_freq)
+        #word_freq_feat.freeze()
         trigram_feat = FeatStruct(get_trigrams_features(factor.factor))
         trigram_feat.freeze()
-        feature = FeatStruct(words=word_freq_feat,trigram=trigram_feat)
+        feature = FeatStruct(trigram=trigram_feat)
         feature.freeze()
         return feature
 
@@ -43,6 +44,11 @@ class FactorsClassifier:
     def classify_sentence(self, sentence):
         article = Article(title='title',body=['body'])
         factor = Factor(factor=sentence, topic=self.topic, sentiment='', article=article)
+        probs = self.classifier.prob_classify(self.factor_features(factor))
+        print sentence
+        for label in probs.samples():
+            print label
+            print probs.prob(label)
         return self.classifier.prob_classify(self.factor_features(factor))
 
     def accuracy(self):
