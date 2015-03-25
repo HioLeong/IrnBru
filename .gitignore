@@ -4,3 +4,4 @@
 *.pyc
 test.html
 bower_components
+/dump

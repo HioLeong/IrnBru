@@ -5,4 +5,5 @@ class Article(scrapy.Item):
     body = scrapy.Field()
     date = scrapy.Field()
     author = scrapy.Field()
+    source = scrapy.Field()
 
