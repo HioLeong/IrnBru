@@ -7,11 +7,6 @@ class ArticleSpider(scrapy.Spider):
     name = ""
     allowed_domains = []
     start_urls = []
-    selections = { 'date': '//span[@class="date"]/text()', 
-            'title': '//h1[@class="content__headline js-score"]/text()', 
-            'body': '//div[@class="content__article-body from-content-api js-article__body"]/p/text()' 
-            }
-
 
     def getUrl(self, url):
         if url[0:2] == '/u':
@@ -31,12 +26,15 @@ class ArticleSpider(scrapy.Spider):
                 yield Request(url, callback = self.parseArticle)
 
     def parseArticle(self, response):
+        print '-------------------------------- Parsing Article --------------------------'
+        print self.selections['date']
         hxs = Selector(response)
         item = Article()
         item['date'] = hxs.xpath(self.selections['date']).extract()
 
         item['title'] = hxs.xpath(self.selections['title']).extract()
         item['body'] = hxs.xpath(self.selections['body']).extract()
+        item['source'] = self.name
 
         if len(item['body']) > 0:
             yield item

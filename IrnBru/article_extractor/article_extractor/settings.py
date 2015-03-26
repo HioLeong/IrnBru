@@ -18,9 +18,9 @@ ITEM_PIPELINES = {
         #'scrapy_mongodb.MongoDBPipeline': 200
 }
 
-#MONGODB_URI = 'mongodb://127.0.0.1:27017'
-#MONGODB_DATABASE = 'fpy_db'
-#MONGODB_COLLECTION = 'topics_trainer_article'
+MONGODB_URI = 'mongodb://127.0.0.1:27017'
+MONGODB_DATABASE = 'fpy_db'
+MONGODB_COLLECTION = 'topics_trainer_article'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'article_extractor (+http://www.yourdomain.com)'
