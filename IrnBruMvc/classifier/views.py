@@ -49,6 +49,8 @@ def get_classify_distribution(dist):
     data = []
     for label in dist.samples():
         percent = int(100*(round(dist.prob(label),2)))
+        print label
+        print dist.prob(label)
         data.append({'label':label, 
         'value': dist.prob(label), 
         'percent': percent

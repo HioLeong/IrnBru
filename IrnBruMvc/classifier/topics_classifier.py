@@ -32,7 +32,7 @@ class TopicsClassifier:
         filtered_toks = [t for t in toks if not t in get_stopwords()]
         filtered_toks = [t for t in filtered_toks if not t in string.punctuation]
         freqdist = get_freqdist_of_toks(filtered_toks)
-        return freqdist.most_common(len(filtered_toks))
+        return [dist[0] for dist in freqdist.most_common(len(filtered_toks))]
 
     def topic_features(self, article):
         word_occurence = self.get_word_occurence(article)
@@ -40,7 +40,7 @@ class TopicsClassifier:
         feature_list.freeze()
         feature = FeatStruct(word_occurence=feature_list)
         feature.freeze()
-        return feature
+        return dict([(word, True) for word in word_occurence])
 
     def train_topic_classifier(self, train_set):
         classifier = NaiveBayesClassifier.train(train_set)

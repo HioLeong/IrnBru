@@ -104,6 +104,7 @@ def get_trigrams_features(factor_sentence):
         feature = get_trigram_featstruct(trigram)
         feature.freeze()
         feat_list.append(feature)
+        print trigram
     return feat_list
 
 def get_ngrams_of_factor(factor_toks, n=3):

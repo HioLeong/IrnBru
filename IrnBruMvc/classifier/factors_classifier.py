@@ -10,7 +10,6 @@ from factors_trainer.models import Factor
 
 class FactorsClassifier:
     def __init__(self, topic_name):
-        print 'Initialising for ' + topic_name
         self.topic = Topic.objects.get(topic=topic_name)
         self.train_set = self.get_train_set(self.topic)
         self.classifier = self.train_factor_classifier(self.train_set)
@@ -45,10 +44,6 @@ class FactorsClassifier:
         article = Article(title='title',body=['body'])
         factor = Factor(factor=sentence, topic=self.topic, sentiment='', article=article)
         probs = self.classifier.prob_classify(self.factor_features(factor))
-        print sentence
-        for label in probs.samples():
-            print label
-            print probs.prob(label)
         return self.classifier.prob_classify(self.factor_features(factor))
 
     def accuracy(self):
