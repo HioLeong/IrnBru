@@ -11,6 +11,7 @@ Article List
         <thead>
             <tr>
                 <th> Article Title </th>
+                <th> Source </th>
                 <th> Labelled </th>
             </tr>
         </thead>
@@ -18,7 +19,9 @@ Article List
             {% for article in articles %}
             <tr>
                 <td> <a href='{{ article.0.id }}'>{{ article.0.title.0 }} </a></td>
-                <td> {{article.1}}</td> </tr>
+                <td> {{ article.0.source }} </td>
+                <td> {{article.1}}</td> 
+            </tr>
             {% endfor %}
         </tbody>
     </table>
