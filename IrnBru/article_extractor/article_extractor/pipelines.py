@@ -12,7 +12,4 @@ class ArticleExtractorPipeline(object):
             collection.insert(dict(item))
             return item
         else:
-            if not (collection.find_one({"title."+item.get('title')})['source']):
-                collection.update({"title": item.get('title')}, {'source': item.get('source')})
-                print'----------------------------Updating----------------------------------'
             raise DropItem('Article with title already exists: %s' % item)

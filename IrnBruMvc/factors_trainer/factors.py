@@ -39,14 +39,14 @@ def get_factor_sentences_for_topic(topic):
         for sentence in get_sentences_from_article(article):
             sentence_article_tuple.append((sentence,article))
     #factor_sentences = [s for s in sentence_article_tuple if sent_contains_topic_common_words(s[0], topic.topic)]
-    return factor_sentences
+    return sentence_article_tuple
 
 def update_factors():
     topics = Topic.objects.all()
     for t in topics:
         factor_sentences = get_factor_sentences_for_topic(t)
         for sent_art_tuple in factor_sentences:
-            create_factor_from_sent_art_tuple(sent_art_tuple)
+            create_factor_from_sent_art_tuple(sent_art_tuple, t)
 
 def create_factor_from_sent_art_tuple(sent_art_tuple, topic):
     # Create Factor if factor does not exist
@@ -103,9 +103,8 @@ def get_trigrams_features(factor_sentence):
     for trigram in factor_trigrams:
         feature = get_trigram_featstruct(trigram)
         feature.freeze()
-        feat_list.append(feature)
-        print trigram
-    return feat_list
+        feat_list.append((trigram,True))
+    return dict(feat_list)
 
 def get_ngrams_of_factor(factor_toks, n=3):
     return list(ngrams(factor_toks, n))

@@ -31,11 +31,11 @@ class FactorsClassifier:
         #word_freq = get_factor_word_list(factor)
         #word_freq_feat = FeatStruct(word_freq)
         #word_freq_feat.freeze()
-        trigram_feat = FeatStruct(get_trigrams_features(factor.factor))
-        trigram_feat.freeze()
-        feature = FeatStruct(trigram=trigram_feat)
-        feature.freeze()
-        return feature
+        #trigram_feat = FeatStruct(get_trigrams_features(factor.factor))
+        #trigram_feat.freeze()
+        #feature = FeatStruct(trigram=trigram_feat)
+        #feature.freeze()
+        return get_trigrams_features(factor.factor)
 
     def classify(self, factor):
         return self.classifier.classify(self.factor_features(factor))
