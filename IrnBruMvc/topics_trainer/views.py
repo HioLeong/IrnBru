@@ -52,8 +52,6 @@ def update_topic(request, article_id):
         except ObjectDoesNotExist:
             choice = Choice(choice=currentarticle, topic=topic_keys)
             choice.save()
-
         return HttpResponse("Update")
     else:
         return HttpResponse("Get")
-

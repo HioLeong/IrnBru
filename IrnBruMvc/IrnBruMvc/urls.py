@@ -11,5 +11,6 @@ urlpatterns = patterns('',
     url(r'^', include('front_page.urls', namespace="front_page")),
     url(r'^classifier/', include('classifier.urls', namespace="classifier")),
     url(r'^profile_setup/', include('profile_setup.urls', namespace='profile_setup')),
+    url(r'^miner/', include('miner.urls', namespace='miner')),
     url(r'^admin/', include(admin.site.urls)),
 )

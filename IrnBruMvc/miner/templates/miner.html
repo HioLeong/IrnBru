@@ -1,0 +1,35 @@
+{% extends "base_miner.html" %}
+{% load staticfiles %}
+
+{% block title %}
+Miner
+{% endblock %}
+
+{% block content%}
+<div class='row'>
+    <div class='col-md-6'>
+        <div class='panel panel-default'>
+            <div class='panel-heading'> Extract Articles</div>
+            <div class='panel-body'>
+                <form id='miner-form'>
+                    {% csrf_token %}
+                    <label> Miner </label>
+                    <select name='source' class="form-control">
+                        {% for miner in miners %}
+                        <option> {{ miner }} </option>
+                        {% endfor %}
+                    </select>
+                    <label> Key Search </label>
+                    <input name='keywords' placeholder='Welfare, Education, etc.' class='form-control'/>
+                    <br/>
+                    <input id='mine-button' type="submit" class="btn btn-outline btn-primary btn-lg btn-block"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block sources %}
+<script src='{% static 'js/miner.js' %}'></script>
+{% endblock %}

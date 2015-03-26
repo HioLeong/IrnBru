@@ -11,7 +11,6 @@ from classifier.factors_classifier import *
 
 import collections
 
-article_classifier = TopicsClassifier()
 
 def index(request):
     template = loader.get_template('factors_classification.html')
@@ -19,6 +18,7 @@ def index(request):
     return HttpResponse(template.render(context))
 
 def get_article_classification(article):
+    article_classifier = TopicsClassifier()
     body = sent_tokenize(article)
     article_obj = Article(title='', body=body)
     return article_classifier.classify(article_obj)

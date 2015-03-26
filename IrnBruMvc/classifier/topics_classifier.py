@@ -12,6 +12,7 @@ class TopicsClassifier:
     def __init__(self):
         self.train_set = self.get_train_set()
         self.classifier = self.train_topic_classifier(self.train_set)
+        print self.get_classifier_accuracy(self.classifier, self.train_set)
 
     def get_train_set(self):
         label_topic = []

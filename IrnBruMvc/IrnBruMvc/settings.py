@@ -132,6 +132,7 @@ INSTALLED_APPS = (
         'front_page',
         'classifier',
         'profile_setup',
+        'miner',
         'django_mongodb_engine'
         )
 
