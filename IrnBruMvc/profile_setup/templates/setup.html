@@ -1,9 +1,31 @@
-{% extends "base.html" %}
+{% extends "base_setup.html" %}
 {% block title %}
 Profile Setup
 {% endblock %}
 
 {% block content %}
-<div class='row'>
-
+<form>
+    {% csrf_token %}
+    <div class='row'>
+        <div class='col-md-6'>
+            <div class='panel panel-default'>
+                <div class='panel-heading'> Topics </div>
+                <div class='panel-body'>
+                    <label> Topic Name </label>
+                    <input class="form-control"/>
+                </div>
+            </div>
+        </div>
+        <div class='col-md-6'>
+            <div class='panel panel-default'>
+                <div class='panel-heading'> Factors</div>
+                <div class='panel-body'>
+                    <label> Factor Name </label>
+                    <input class="form-control"/>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 {% endblock %}
