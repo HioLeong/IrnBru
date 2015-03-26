@@ -10,5 +10,6 @@ urlpatterns = patterns('',
     url(r'^article_summary/', include('article_summary.urls', namespace="article_summary")),
     url(r'^', include('front_page.urls', namespace="front_page")),
     url(r'^classifier/', include('classifier.urls', namespace="classifier")),
+    url(r'^profile_setup/', include('profile_setup.urls', namespace='profile_setup')),
     url(r'^admin/', include(admin.site.urls)),
 )

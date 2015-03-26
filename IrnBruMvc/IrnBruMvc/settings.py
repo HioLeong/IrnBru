@@ -131,6 +131,7 @@ INSTALLED_APPS = (
         'factors_trainer',
         'front_page',
         'classifier',
+        'profile_setup',
         'django_mongodb_engine'
         )
 
