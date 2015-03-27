@@ -4,14 +4,18 @@ var miner = {
                 type: 'POST',
                 url: '/miner/mine/',
                 data: $('#miner-form').serialize(),
+                beforeSend: function() {
+                    $('#loading').show();
+                },
                 success: function(data) {
-                    console.log(data);
+                    $('#loading').hide();
                 }
         });
     }
 };
 
 $(document).ready(function () {
+    $('#loading').hide();
     $('#mine-button').on('click', function(e) {
         e.preventDefault();
         miner.mine();

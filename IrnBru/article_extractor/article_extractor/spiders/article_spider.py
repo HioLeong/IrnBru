@@ -1,4 +1,5 @@
 import scrapy
+import json
 from scrapy.selector import Selector
 from scrapy.http import Request
 from article_extractor.items import Article
@@ -7,6 +8,10 @@ class ArticleSpider(scrapy.Spider):
     name = ""
     allowed_domains = []
     start_urls = []
+    def __init__(self):
+        with open('starturl.json') as data_file:
+            data = json.load(data_file)
+            self.start_urls = data['start_urls']
 
     def getUrl(self, url):
         if url[0:2] == '/u':

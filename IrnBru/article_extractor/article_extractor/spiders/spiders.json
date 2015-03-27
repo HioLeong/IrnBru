@@ -1,0 +1,39 @@
+[
+{
+    "name":"bbc",
+        "domain":"bbc.co.uk",
+        "selections" : {
+            "date": "//span[@class='date']/text()",
+            "title": "//h1[@class='story-body__h1']/text()",
+            "body": "//div[@class='story-body__inner']/p/text()"
+        }
+},
+{
+    "name" : "guardian",
+    "domain" : "theguardian.com",
+    "selections": {
+        "date": "//span[@class='date']/text()", 
+        "title": "//h1[@class='content__headline js-score']/text()", 
+        "body": "//div[@class='content__article-body from-content-api js-article__body']/p/text()" 
+    }
+},
+{
+    "name": "dailymail",
+    "domain": "dailymail.co.uk",
+        "selections": {
+            "date": "//span[@class='article-timestamp article-timestamp-published']/text()",
+            "title": "//div[@id='js-article-text']/h1/text()",
+            "body": "//div[@id='js-article-text']/p[@class='mol-para-with-font']/font/text()"
+        }
+},
+{
+
+    "name":"scotsman",
+    "domain": "scotsman.com",
+    "selections" : {
+        "date": "//span[@class='timestamp__date']/text()",
+        "title": "//h1[@class='article__title']/text()",
+        "body": "//section[@class='article-content article__content KonaBody']/p/text()"
+    }
+}
+]

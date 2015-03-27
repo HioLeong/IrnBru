@@ -4,7 +4,7 @@ import json
 
 client = MongoClient('127.0.0.1', 27017)
 db = client.fyp_db
-collection = db.topics_trainer_article
+collection = db.topics_trainer_article_new
 
 class ArticleExtractorPipeline(object):
     def process_item(self, item, spider):
