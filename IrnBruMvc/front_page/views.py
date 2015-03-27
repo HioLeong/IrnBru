@@ -15,7 +15,14 @@ def index(request):
 
 def dashboard(request):
     template = loader.get_template('dashboard.html')
-    context = RequestContext(request, {})
+    factors_identified_count = Factor.objects.exclude(sentiment='').count();
+    articles_count = Article.objects.count()
+    articles_identified_count = Choice.objects.count()
+    context = RequestContext(request, {
+        'articles_count': articles_count,
+        'factors_identified_count': factors_identified_count,
+        'articles_identified_count': articles_identified_count
+        })
     return HttpResponse(template.render(context))
 
 def get_topics_articles_count(request):

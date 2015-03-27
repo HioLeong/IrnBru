@@ -11,6 +11,7 @@ from classifier.factors_classifier import *
 
 import collections
 
+article_classifier = TopicsClassifier()
 
 def index(request):
     template = loader.get_template('factors_classification.html')
@@ -18,7 +19,6 @@ def index(request):
     return HttpResponse(template.render(context))
 
 def get_article_classification(article):
-    article_classifier = TopicsClassifier()
     body = sent_tokenize(article)
     article_obj = Article(title='', body=body)
     return article_classifier.classify(article_obj)
@@ -32,8 +32,10 @@ def get_factors_classification(article, topic):
 
 def get_factors_list_percentage(factors_list):
     print factors_list
-    yes_percentage = (factors_list.count('Yes')/len(factors_list))*100
-    no_percentage = (factors_list.count('No')/len(factors_list))*100
+    print factors_list.count('Yes')
+    print factors_list.count('No')
+    yes_percentage = round((float(factors_list.count('Yes'))/len(factors_list))*100,2)
+    no_percentage = round((float(factors_list.count('No'))/len(factors_list))*100,2)
     return [
             {
                 'label': 'Yes',

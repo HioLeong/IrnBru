@@ -5,21 +5,33 @@ Topics Factors Listing
 {% endblock %}
 
 {% block content %}
-<div class='col-lg-12'>
-    <table id='topics-table' class='table table-bordered table-striped table-hover display' cellspacing='0' width='100%'>
-        <thead>
-            <tr>
-                <th> Topic </th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for topic in topics %}
-            <tr>
-                <td> <a href='get_factor/{{ topic.topic }}'>{{ topic.topic }} </a></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div class='row'>
+    <div class='col-lg-2'>
+        <form>
+            {% csrf_token %}
+            <button class='btn btn-outline btn-primary' id='update'>Update</button>
+        </form>
+    </div>
+</div>
+
+<div class='row'>
+    <div class='col-lg-12'>
+        <br/>
+        <table id='topics-table' class='table table-bordered table-striped table-hover display' cellspacing='0' width='100%'>
+            <thead>
+                <tr>
+                    <th> Topic </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for topic in topics %}
+                <tr>
+                    <td> <a href='get_factor/{{ topic.topic }}'>{{ topic.topic }} </a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}
 
@@ -27,6 +39,21 @@ Topics Factors Listing
 <script>
     $(document).ready(function() {
         $('#topics-table').DataTable();
+        $('#update').on('click', function(e) {
+            console.log('clicking');
+            e.preventDefault();
+            $.ajax({
+                    type: 'GET',
+                    url: 'update/',
+                    beforeSend: function() {
+                        $('#update').text('Updating...');
+                    },
+                    success: function(data) {
+                        $('#update').text('Update');
+                    }
+            });
+            return false;
+        });
     });
 </script>
 {% endblock %}
