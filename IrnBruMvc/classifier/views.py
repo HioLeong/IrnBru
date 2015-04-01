@@ -24,6 +24,7 @@ def get_article_classification(article):
     return article_classifier.classify(article_obj)
 
 def get_factors_classification(article, topic):
+
     classifier = FactorsClassifier(topic)
     bodies = sent_tokenize(article)
     article_obj = Article(title='', body=bodies)
@@ -65,10 +66,14 @@ def classify_article(request):
         dist = get_article_classification(article)
         data = get_classify_distribution(dist)
         dist_factors = get_factors_classification(article, dist.max())
+        bodies = sent_tokenize(article)
+        zipped = zip(bodies, dist_factors)
         factor_data = get_factors_list_percentage(dist_factors)
         template = loader.get_template('classification_report.html')
-        context = RequestContext(request, { 'article_data': data,
-            'factor_data': factor_data
+        context = RequestContext(request, { 
+            'article_data': data,
+            'factor_data': factor_data,
+            'sentence_analysis': zipped
             })
         return HttpResponse(template.render(context))
     else:
