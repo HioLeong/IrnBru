@@ -197,12 +197,14 @@
       \smallskip
       {\Large \supname \par}
       \vfill
-      {\large A report submitted in partial fulfillment for the \par}
-      {\large degree of Computer Science MEng\par}
+      {\normalsize This report is submitted as part requirement for \par}
+      {\normalsize the MEng Degree in Computer Science at UCL.\par}
+      {\normalsize It is substantially the result of my own work \par}
+      {\normalsize except where explicitly indicated in the text.\par}
+      {\normalsize The report may be freely copied and distributed \par}
+      {\normalsize provided the source is explicitly acknowledged. \par}
       \bigskip
       \bigskip
-      {\large in the \par}
-      {\large \facname \par}
       {\large \deptname \par}
       \bigskip
       \bigskip
